@@ -48,8 +48,8 @@ ec_tile_map <- function(data = NULL) {
     ec_languages |>
       mutate(lang_col = fct_inorder(lang_col)) |>
       ggplot2::ggplot(aes(x, y)) +
-      ggplot2::geom_tile(aes(fill = lang_col), show.legend = FALSE, size = 5) +
-      ggplot2::geom_label(aes(label = language))+
+      ggplot2::geom_tile(aes(fill = lang_col), show.legend = FALSE) +
+      ggplot2::geom_text(aes(label = language), color = "white")+
       ggplot2::theme_void()+
       ggplot2::scale_fill_manual(values = ec_languages$lang_col)
   }
