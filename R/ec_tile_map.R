@@ -25,7 +25,8 @@ ec_tile_map <- function(data = NULL) {
                 "feature" %in% colnames(data))
     ec_languages |>
       dplyr::left_join(data, by = "language") |>
-      dplyr::mutate(alpha = if_else(is.na(feature), 0.2, 1)) |>
+      dplyr::mutate(alpha = if_else(is.na(feature), 0.2, 1),
+                    lang_col = fct_inorder(lang_col)) |>
       ggplot2::ggplot(aes(x, y, fill = lang_col, color = feature, alpha = alpha)) +
       ggplot2::geom_tile(show.legend = FALSE, linewidth = 0) +
       ggplot2::geom_segment(aes(x=x-0.5, xend=x-0.5, y=y-0.5, yend=y+0.5),
@@ -39,14 +40,17 @@ ec_tile_map <- function(data = NULL) {
       ggplot2::geom_text(aes(label = language), color = "black") +
       ggplot2::theme_void()+
       ggplot2::scale_fill_manual(values = ec_languages$lang_col)+
-      ggplot2::scale_colour_discrete(na.translate = F)+
+      ggplot2::scale_colour_discrete(na.translate = FALSE)+
       ggplot2::guides(alpha="none")+
       ggplot2::labs(color = NULL)+
       ggplot2::theme(legend.position = "bottom")
   } else {
     ec_languages |>
-      ggplot2::ggplot(aes(x, y, fill = lang_col, color = feature)) +
-      ggplot2::geom_tile(show.legend = FALSE, size = 5) +
-      ggplot2::theme_void()
+      mutate(lang_col = fct_inorder(lang_col)) |>
+      ggplot2::ggplot(aes(x, y)) +
+      ggplot2::geom_tile(aes(fill = lang_col), show.legend = FALSE, size = 5) +
+      ggplot2::geom_label(aes(label = language))+
+      ggplot2::theme_void()+
+      ggplot2::scale_fill_manual(values = ec_languages$lang_col)
   }
 }
