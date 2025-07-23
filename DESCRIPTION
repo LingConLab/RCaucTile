@@ -10,9 +10,10 @@ Authors@R: c(person("George", "Moroz",
                     role = c("aut"),
                     email = "...",
                     comment = c(ORCID="...")))
-Description: Tile Grid Maps for East Caucasian Languages
+Description: This package provides an R version of the East Caucasian Languages dataset and a tool for generating tile maps from it. The inspiration for this package is the Typological Atlas of the Languages of Daghestan (TALD) <https://lingconlab.ru/tald>. Initially TALD features three different types of map visualizations. This package introduces a new visualization: a tile map that displays a  rectangle for each language, allowing for color-coding based on specific features.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
-Imports: ggplot2, dplyr, forcats
+Depends: R (>= 4.1.0)
+Imports: ggplot2
 RoxygenNote: 7.3.2.9000

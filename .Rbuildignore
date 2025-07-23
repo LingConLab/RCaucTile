@@ -1,3 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^dataset_creation\*
+dataset_creation\*
+dataset_creation
+LICENSE.md

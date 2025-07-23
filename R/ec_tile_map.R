@@ -20,18 +20,30 @@
 #' @importFrom ggplot2 labs
 #' @importFrom ggplot2 theme
 #' @importFrom ggplot2 guides
-#' @importFrom dplyr left_join
-#' @importFrom dplyr if_else
-#' @importFrom dplyr mutate
-#' @importFrom dplyr rowwise
-#' @importFrom dplyr rename
-#' @importFrom forcats fct_inorder
 #' @importFrom grDevices col2rgb
 
 ec_tile_map <- function(data = NULL, feature_column = "feature") {
-  # Check whether data are provided
-  if(!is_null(data)){
-    # Arguments check
+
+# fake variables for R CMD check to be succeedded -------------------------
+
+  x <- NULL
+  y <- NULL
+  lang_col <- NULL
+  feature <- NULL
+  alpha <- NULL
+  language <- NULL
+  # text_color <- NULL
+
+# load data ---------------------------------------------------------------
+
+ec_languages <- RCaucTile::ec_languages
+
+# Check whether user provided some data -----------------------------------
+
+  if(!is.null(data)){
+
+# Arguments check ---------------------------------------------------------
+
     stopifnot("Data should be a dataframe" =
                 "data.frame" %in% class(data),
               "Data should contain column 'language'" =
@@ -43,21 +55,40 @@ ec_tile_map <- function(data = NULL, feature_column = "feature") {
               one value" =
                 length(feature_column) == 1)
 
-    ec_languages |>
-      dplyr::left_join(data, by = "language") |>
-      dplyr::rename(feature = {{feature}}) |>
-      dplyr::rowwise() |>
-      dplyr::mutate(red = grDevices::col2rgb(lang_col)[1],
-                    green = grDevices::col2rgb(lang_col)[2],
-                    blue = grDevices::col2rgb(lang_col)[3],
-                    text_color = dplyr::if_else(
-                      (red*0.299 + green*0.587 + blue*0.114) > 186,
-                      "#000000",
-                      "#ffffff"),
-                    alpha = if_else(is.na(feature), 0.2, 1),
-                    text_color = dplyr::if_else(alpha == 0.2, "grey70", text_color),
-                    lang_col = forcats::fct_inorder(lang_col)) ->
-      for_plot
+# merge EC dataset with data provided by a user ---------------------------
+
+    for_plot <- merge(ec_languages, data, all.x = TRUE)
+
+# create a column with the name feature if there is no one ----------------
+
+    names(for_plot)[names(for_plot) == feature_column] <- "feature"
+
+# add a 'text_color' column for the text colors ---------------------------
+
+    grDevices::col2rgb(for_plot$lang_col) |>
+      t() |>
+      as.data.frame() ->
+      colors_for_text
+
+    for_plot$text_color <- ifelse((colors_for_text$red*0.299 +
+                                     colors_for_text$green*0.587 +
+                                     colors_for_text$blue*0.114) > 186,
+                                         "#000000",
+                                         "#ffffff")
+
+    for_plot$text_color <- ifelse(is.na(for_plot$feature),
+                                  "grey70",
+                                  for_plot$text_color)
+
+# add an 'alpha' column for the cases when there are NAs in data ----------
+
+    for_plot$alpha <- ifelse(is.na(for_plot$feature), 0.2, 1)
+
+# create a factor for correct coloring in ggplot --------------------------
+
+    for_plot$lang_col <- factor(for_plot$lang_col, levels = for_plot$lang_col)
+
+# create a map ------------------------------------------------------------
 
     for_plot |>
       ggplot2::ggplot(ggplot2::aes(x, y, fill = lang_col,
@@ -96,17 +127,33 @@ ec_tile_map <- function(data = NULL, feature_column = "feature") {
       ggplot2::guides(alpha="none")+
       ggplot2::labs(color = NULL)+
       ggplot2::theme(legend.position = "bottom")
+
   } else {
-    ec_languages |>
-      dplyr::rowwise() |>
-      dplyr::mutate(red = grDevices::col2rgb(lang_col)[1],
-                    green = grDevices::col2rgb(lang_col)[2],
-                    blue = grDevices::col2rgb(lang_col)[3],
-                    text_color = dplyr::if_else(
-                      (red*0.299 + green*0.587 + blue*0.114) > 186,
-                      "#000000",
-                      "#ffffff"),
-                    lang_col = forcats::fct_inorder(lang_col)) |>
+
+# if there is no data print language template -----------------------------
+
+    for_plot <- ec_languages
+
+# add a 'text_color' column for the text colors ---------------------------
+
+    grDevices::col2rgb(for_plot$lang_col) |>
+      t() |>
+      as.data.frame() ->
+      colors_for_text
+
+    for_plot$text_color <- ifelse((colors_for_text$red*0.299 +
+                                     colors_for_text$green*0.587 +
+                                     colors_for_text$blue*0.114) > 186,
+                                  "#000000",
+                                  "#ffffff")
+
+# create a factor for correct coloring in ggplot --------------------------
+
+    for_plot$lang_col <- factor(for_plot$lang_col, levels = for_plot$lang_col)
+
+# create a map ------------------------------------------------------------
+
+    for_plot |>
       ggplot2::ggplot(ggplot2::aes(x, y)) +
       ggplot2::geom_tile(ggplot2::aes(fill = lang_col), show.legend = FALSE) +
       ggplot2::geom_text(ggplot2::aes(label = language, color = text_color),
