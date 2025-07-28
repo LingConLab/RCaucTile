@@ -10,12 +10,12 @@ A data frame with 56 rows and 10 variables:
   \item{language}{- hi}
   \item{x}{- hi}
   \item{y}{- hi}
-  \item{aff}{- hi}
+  \item{affiliation}{- hi}
   \item{family}{- hi}
-  \item{gltc_lang}{- hi}
-  \item{lang_col}{- hi}
-  \item{aff_col}{- hi}
-  \item{abbr}{- hi}
+  \item{glottocode}{- hi}
+  \item{language_color}{- hi}
+  \item{affiliation_color}{- hi}
+  \item{abbreviation}{- hi}
 }
 }
 \usage{

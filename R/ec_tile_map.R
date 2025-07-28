@@ -2,6 +2,7 @@
 #'
 #' @param data Could be NULL, then it will print the language template. Otherwise should be a dataframe with language column annotated with some feature. Default value is NULL.
 #' @param feature_column Character vector of length 1 which specifies the column in dataframe that contains annotation for the feature to color the language template with.
+#' @param abbreviation logical variable that specifies, whether use abbreviations for languages specified in the package.
 #'
 #' @returns a `ggplot2` object
 #' @export
@@ -22,7 +23,9 @@
 #' @importFrom ggplot2 guides
 #' @importFrom grDevices col2rgb
 
-ec_tile_map <- function(data = NULL, feature_column = "feature") {
+ec_tile_map <- function(data = NULL,
+                        feature_column = "feature",
+                        abbreviation = TRUE) {
 
 # fake variables for R CMD check to be succeedded -------------------------
 
@@ -65,7 +68,7 @@ ec_languages <- RCaucTile::ec_languages
 
 # add a 'text_color' column for the text colors ---------------------------
 
-    grDevices::col2rgb(for_plot$lang_col) |>
+    grDevices::col2rgb(for_plot$language_color) |>
       t() |>
       as.data.frame() ->
       colors_for_text
@@ -86,12 +89,21 @@ ec_languages <- RCaucTile::ec_languages
 
 # create a factor for correct coloring in ggplot --------------------------
 
-    for_plot$lang_col <- factor(for_plot$lang_col, levels = for_plot$lang_col)
+    for_plot$language_color <- factor(for_plot$language_color,
+                                      levels = for_plot$language_color)
+
+# change labels to abbreviations ------------------------------------------
+
+    if(isTRUE(abbreviation)){
+      for_plot$language <- ifelse(is.na(for_plot$abbreviation),
+                                  for_plot$language,
+                                  for_plot$abbreviation)
+    }
 
 # create a map ------------------------------------------------------------
 
     for_plot |>
-      ggplot2::ggplot(ggplot2::aes(x, y, fill = lang_col,
+      ggplot2::ggplot(ggplot2::aes(x, y, fill = language_color,
                                    color = feature, alpha = alpha)) +
       ggplot2::geom_tile(show.legend = FALSE, linewidth = 0) +
       ggplot2::geom_segment(ggplot2::aes(x=x-0.5, xend=x-0.5,
@@ -122,7 +134,7 @@ ec_languages <- RCaucTile::ec_languages
                         label = for_plot[for_plot$text_color == "grey70",]$language,
                         color = "grey70")+
       ggplot2::theme_void()+
-      ggplot2::scale_fill_manual(values = ec_languages$lang_col)+
+      ggplot2::scale_fill_manual(values = ec_languages$language_color)+
       ggplot2::scale_colour_discrete(na.translate = FALSE)+
       ggplot2::guides(alpha="none")+
       ggplot2::labs(color = NULL)+
@@ -136,7 +148,7 @@ ec_languages <- RCaucTile::ec_languages
 
 # add a 'text_color' column for the text colors ---------------------------
 
-    grDevices::col2rgb(for_plot$lang_col) |>
+    grDevices::col2rgb(for_plot$language_color) |>
       t() |>
       as.data.frame() ->
       colors_for_text
@@ -149,17 +161,25 @@ ec_languages <- RCaucTile::ec_languages
 
 # create a factor for correct coloring in ggplot --------------------------
 
-    for_plot$lang_col <- factor(for_plot$lang_col, levels = for_plot$lang_col)
+    for_plot$language_color <- factor(for_plot$language_color,
+                                      levels = for_plot$language_color)
 
+# change labels to abbreviations ------------------------------------------
+
+    if(isTRUE(abbreviation)){
+      for_plot$language <- ifelse(is.na(for_plot$abbreviation),
+                                  for_plot$language,
+                                  for_plot$abbreviation)
+    }
 # create a map ------------------------------------------------------------
 
     for_plot |>
       ggplot2::ggplot(ggplot2::aes(x, y)) +
-      ggplot2::geom_tile(ggplot2::aes(fill = lang_col), show.legend = FALSE) +
+      ggplot2::geom_tile(ggplot2::aes(fill = language_color), show.legend = FALSE) +
       ggplot2::geom_text(ggplot2::aes(label = language, color = text_color),
                          show.legend = FALSE)+
       ggplot2::theme_void()+
-      ggplot2::scale_fill_manual(values = ec_languages$lang_col)+
+      ggplot2::scale_fill_manual(values = ec_languages$language_color)+
       ggplot2::scale_color_manual(values = c("black", "white"))
   }
 }

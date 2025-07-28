@@ -4,7 +4,7 @@
 \alias{ec_tile_map}
 \title{Draw a grid tile map for East Caucasian languages.}
 \usage{
-ec_tile_map(data = NULL, feature_column = "feature")
+ec_tile_map(data = NULL, feature_column = "feature", abbreviation)
 }
 \arguments{
 \item{data}{Could be NULL, then it will print the language template. Otherwise should be a dataframe with language column annotated with some feature. Default value is NULL.}
