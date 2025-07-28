@@ -4,12 +4,14 @@
 \alias{ec_tile_map}
 \title{Draw a grid tile map for East Caucasian languages.}
 \usage{
-ec_tile_map(data = NULL, feature_column = "feature", abbreviation)
+ec_tile_map(data = NULL, feature_column = "feature", abbreviation = TRUE)
 }
 \arguments{
 \item{data}{Could be NULL, then it will print the language template. Otherwise should be a dataframe with language column annotated with some feature. Default value is NULL.}
 
 \item{feature_column}{Character vector of length 1 which specifies the column in dataframe that contains annotation for the feature to color the language template with.}
+
+\item{abbreviation}{logical variable that specifies, whether use abbreviations for languages specified in the package.}
 }
 \value{
 a `ggplot2` object

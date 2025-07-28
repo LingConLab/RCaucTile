@@ -31,11 +31,11 @@ ec_tile_map <- function(data = NULL,
 
   x <- NULL
   y <- NULL
-  lang_col <- NULL
+  language_color <- NULL
   feature <- NULL
   alpha <- NULL
   language <- NULL
-  # text_color <- NULL
+  text_color <- NULL
 
 # load data ---------------------------------------------------------------
 
@@ -75,7 +75,7 @@ ec_languages <- RCaucTile::ec_languages
 
     for_plot$text_color <- ifelse((colors_for_text$red*0.299 +
                                      colors_for_text$green*0.587 +
-                                     colors_for_text$blue*0.114) > 186,
+                                     colors_for_text$blue*0.114) > 160,
                                          "#000000",
                                          "#ffffff")
 
@@ -155,7 +155,7 @@ ec_languages <- RCaucTile::ec_languages
 
     for_plot$text_color <- ifelse((colors_for_text$red*0.299 +
                                      colors_for_text$green*0.587 +
-                                     colors_for_text$blue*0.114) > 186,
+                                     colors_for_text$blue*0.114) > 160,
                                   "#000000",
                                   "#ffffff")
 
