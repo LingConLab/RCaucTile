@@ -1,0 +1,21 @@
+---
+title: "RCaucTile: Tile Grid Maps for East Caucasian Languages"
+format: html
+fig-width: 12
+fig-height: 9
+---
+
+```{r}
+library(RCaucTile)
+ec_tile_map()
+ec_tile_map(ec_languages,
+            feature_column = "morning_greetings")
+ec_tile_map(ec_languages,
+            feature_column = "morning_greetings",
+            title = "Morning greetings (Naccarato, Verhees 2021)")
+ec_tile_map(ec_languages,
+            feature_column = "morning_greetings",
+            fill_by = "feature",
+            title = "Morning greetings (Naccarato, Verhees 2021)")
+```
+

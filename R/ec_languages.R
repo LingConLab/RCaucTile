@@ -15,6 +15,7 @@
 #'   \item{language_color}{- hi}
 #'   \item{affiliation_color}{- hi}
 #'   \item{abbreviation}{- hi}
+#'   \item{morning_greetings}{This variable contains values from the \href{https://lingconlab.ru/tald/005_morning_greetings.html}{"Morning Greetings" chapter} from TALD (Naccarato, Verhees 2021). The languages of Daghestan can be classified into three groups according to whether they feature morning greetings including questions about the night’s rest (value `Did you wake up?`), based on the combination of concepts like “morning” and “good” (value `Good morning`), and both stratagies (value `Both`).}
 #' }
 
 "ec_languages"

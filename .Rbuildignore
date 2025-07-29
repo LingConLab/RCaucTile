@@ -1,5 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 dataset_creation\*
+docs\*
+docs
 dataset_creation
 LICENSE.md
