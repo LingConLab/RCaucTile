@@ -3,7 +3,7 @@
 #' @param data Could be NULL, then it will print the language template. Otherwise should be a dataframe with language column annotated with some feature. Default value is NULL.
 #' @param feature_column Character vector of length 1 which specifies the column in dataframe that contains annotation for the feature to color the language template with.
 #' @param title Character vector of length 1 which specifies the title of the plot.
-#' @param fill_by Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value "language") or by the feature (value "feature"). Default value is "language".
+#' @param fill_by Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value "language") or by the feature (value "feature"). Default value is "feature".
 #' @param abbreviation Logical variable that specifies, whether use abbreviations for languages specified in the package.
 #'
 #' @returns a `ggplot2` object
@@ -31,7 +31,7 @@
 ec_tile_map <- function(data = NULL,
                         feature_column = "feature",
                         title = NULL,
-                        fill_by = "language",
+                        fill_by = "feature",
                         abbreviation = TRUE) {
 
   # fake variables for R CMD check to be succeedded -------------------------

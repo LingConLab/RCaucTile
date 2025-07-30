@@ -8,7 +8,7 @@ ec_tile_map(
   data = NULL,
   feature_column = "feature",
   title = NULL,
-  fill_by = "language",
+  fill_by = "feature",
   abbreviation = TRUE
 )
 }
@@ -19,7 +19,7 @@ ec_tile_map(
 
 \item{title}{Character vector of length 1 which specifies the title of the plot.}
 
-\item{fill_by}{Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value "language") or by the feature (value "feature"). Default value is "language".}
+\item{fill_by}{Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value "language") or by the feature (value "feature"). Default value is "feature".}
 
 \item{abbreviation}{Logical variable that specifies, whether use abbreviations for languages specified in the package.}
 }
