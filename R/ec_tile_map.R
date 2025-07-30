@@ -136,9 +136,11 @@ ec_tile_map <- function(data = NULL,
     # create a map ------------------------------------------------------------
 
     for_plot |>
-      ggplot2::ggplot(ggplot2::aes(x, y, fill = fill_by,
-                                   color = feature, alpha = alpha)) +
-      ggplot2::geom_tile(show.legend = FALSE, linewidth = 0) +
+      ggplot2::ggplot(ggplot2::aes(x, y,
+                                   fill = fill_by,
+                                   color = feature,
+                                   alpha = alpha)) +
+      ggplot2::geom_tile(linewidth = 0) +
       ggplot2::geom_tile(alpha = 0, linewidth = 3, height = 0.92, width = 0.92)+
       ggplot2::annotate(geom = "text",
                         x = for_plot[for_plot$text_color == "#000000",]$x,
@@ -156,14 +158,20 @@ ec_tile_map <- function(data = NULL,
                         label = for_plot[for_plot$text_color == "grey70",]$language,
                         color = "grey70")+
       ggplot2::theme_void()+
-      ggplot2::scale_colour_discrete(na.translate = FALSE)+
-      ggplot2::guides(alpha="none", fill = "none")+
-      ggplot2::labs(color = NULL, title = title)+
+      ggplot2::labs(fill = NULL, color = NULL, title = title)+
       ggplot2::theme(legend.position = "bottom") ->
       p
 
     if(fill_by == "language"){
-      p <- p + ggplot2::scale_fill_manual(values = ec_languages$language_color)
+      p <- p +
+        ggplot2::scale_fill_manual(values = ec_languages$language_color) +
+        ggplot2::scale_colour_discrete(na.translate = FALSE)+
+        ggplot2::guides(alpha="none", fill = "none")
+    } else {
+      p <- p +
+        ggplot2::guides(alpha="none", color = "none")+
+        ggplot2::scale_fill_discrete(na.translate = FALSE)+
+        ggplot2::scale_colour_discrete(na.translate = FALSE)
     }
 
     return(p)
