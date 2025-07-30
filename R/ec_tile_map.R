@@ -13,7 +13,6 @@
 #' ec_tile_map()
 #' ec_tile_map(ec_languages,
 #'             feature_column = "morning_greetings",
-#'             fill_by = "feature",
 #'             title = "Morning greetings (Naccarato, Verhees 2021)")
 #'
 #' @importFrom ggplot2 ggplot
