@@ -1,10 +1,11 @@
 #' Draw a grid tile map for East Caucasian languages.
 #'
-#' @param data Could be NULL, then it will print the language template. Otherwise should be a dataframe with language column annotated with some feature. Default value is NULL.
+#' @param data Could be \code{NULL}, then it will print the language template. Otherwise should be a dataframe with language column annotated with some feature. Default value is \code{NULL}.
 #' @param feature_column Character vector of length 1 which specifies the column in dataframe that contains annotation for the feature to color the language template with.
-#' @param title Character vector of length 1 which specifies the title of the plot.
-#' @param fill_by Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value "language") or by the feature (value "feature"). Default value is "feature".
-#' @param abbreviation Logical variable that specifies, whether use abbreviations for languages specified in the package.
+#' @param title Character vector of length 1, which specifies the title of the plot.
+#' @param title_position Character vector of length 1, which specifies the title's position. Possible values are \code{left}, \code{center}, and \code{right}. Default value is \code{left}.
+#' @param fill_by Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value \code{language}) or by the feature (value \code{feature}). Default value is \code{feature}.
+#' @param abbreviation Logical variable that specifies, whether use abbreviations for languages specified in the package. Default value is \code{TRUE}.
 #'
 #' @returns a `ggplot2` object
 #' @export
@@ -24,12 +25,14 @@
 #' @importFrom ggplot2 theme_void
 #' @importFrom ggplot2 labs
 #' @importFrom ggplot2 theme
+#' @importFrom ggplot2 element_text
 #' @importFrom ggplot2 guides
 #' @importFrom grDevices col2rgb
 
 ec_tile_map <- function(data = NULL,
                         feature_column = "feature",
                         title = NULL,
+                        title_position = "left",
                         fill_by = "feature",
                         abbreviation = TRUE) {
 
@@ -47,11 +50,32 @@ ec_tile_map <- function(data = NULL,
 
   ec_languages <- RCaucTile::ec_languages
 
+  # Arguments check ---------------------------------------------------------
+
+  stopifnot("The argument 'title' should be a character vector with
+              one value" =
+              length(title) <= 1,
+            "The argument 'title_position' should be a character vector with
+              one of the following values: 'left', 'center', or 'right'" =
+              length(title_position) <= 1,
+            "The argument 'title_position' should be a character vector with
+              one of the following values: 'left', 'center', or 'right'" =
+              title_position %in% c('left', 'center', 'right'),
+            "The argument 'abbreviation' should be a logical vector with
+              one value" =
+              length(abbreviation) == 1)
+
+  if(title_position == "left") {
+    title_position <- 0
+  } else if(title_position == "center") {
+    title_position <- 0.5
+  } else if(title_position == "right") {
+    title_position <- 1
+  }
+
   # Check whether user provided some data -----------------------------------
 
   if(!is.null(data)){
-
-    # Arguments check ---------------------------------------------------------
 
     stopifnot("Data should be a dataframe" =
                 "data.frame" %in% class(data),
@@ -63,12 +87,6 @@ ec_tile_map <- function(data = NULL,
               "The argument 'feature_column' should be a character vector with
               one value" =
                 length(feature_column) == 1,
-              "The argument 'title' should be a character vector with
-              one value" =
-                length(title) <= 1,
-              "The argument 'abbreviation' should be a logical vector with
-              one value" =
-                length(abbreviation) == 1,
               "The argument 'fill_by' should be a character vector with
               two possible values: 'language' or 'feature'" =
                 length(fill_by) == 1,
@@ -159,7 +177,8 @@ ec_tile_map <- function(data = NULL,
                         color = "grey70")+
       ggplot2::theme_void()+
       ggplot2::labs(fill = NULL, color = NULL, title = title)+
-      ggplot2::theme(legend.position = "bottom") ->
+      ggplot2::theme(legend.position = "bottom",
+                     plot.title = ggplot2::element_text(hjust = title_position)) ->
       p
 
     if(fill_by == "language"){
@@ -217,6 +236,7 @@ ec_tile_map <- function(data = NULL,
       ggplot2::theme_void()+
       ggplot2::scale_fill_manual(values = ec_languages$language_color)+
       ggplot2::scale_color_manual(values = c("black", "white"))+
-      ggplot2::labs(color = NULL, title = title)
+      ggplot2::labs(color = NULL, title = title)+
+      ggplot2::theme(plot.title = ggplot2::element_text(hjust = title_position))
   }
 }

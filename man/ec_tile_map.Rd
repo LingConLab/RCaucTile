@@ -8,20 +8,23 @@ ec_tile_map(
   data = NULL,
   feature_column = "feature",
   title = NULL,
+  title_position = "left",
   fill_by = "feature",
   abbreviation = TRUE
 )
 }
 \arguments{
-\item{data}{Could be NULL, then it will print the language template. Otherwise should be a dataframe with language column annotated with some feature. Default value is NULL.}
+\item{data}{Could be \code{NULL}, then it will print the language template. Otherwise should be a dataframe with language column annotated with some feature. Default value is \code{NULL}.}
 
 \item{feature_column}{Character vector of length 1 which specifies the column in dataframe that contains annotation for the feature to color the language template with.}
 
-\item{title}{Character vector of length 1 which specifies the title of the plot.}
+\item{title}{Character vector of length 1, which specifies the title of the plot.}
 
-\item{fill_by}{Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value "language") or by the feature (value "feature"). Default value is "feature".}
+\item{title_position}{Character vector of length 1, which specifies the title's position. Possible values are \code{left}, \code{center}, and \code{right}. Default value is \code{left}.}
 
-\item{abbreviation}{Logical variable that specifies, whether use abbreviations for languages specified in the package.}
+\item{fill_by}{Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value \code{language}) or by the feature (value \code{feature}). Default value is \code{feature}.}
+
+\item{abbreviation}{Logical variable that specifies, whether use abbreviations for languages specified in the package. Default value is \code{TRUE}.}
 }
 \value{
 a `ggplot2` object
