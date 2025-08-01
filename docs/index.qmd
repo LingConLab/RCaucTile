@@ -17,6 +17,12 @@ ec_tile_map(ec_languages,
             title = "Morning greetings (Naccarato, Verhees 2021)")
 ec_tile_map(ec_languages,
             feature_column = "morning_greetings",
+            title = "Morning greetings (Naccarato, Verhees 2021)",
+            title_position = "center")
+ec_tile_map(title = "This is a Tile map of East Caucasian languages",
+            title_position = "right")
+ec_tile_map(ec_languages,
+            feature_column = "morning_greetings",
             fill_by = "language",
             title = "Morning greetings (Naccarato, Verhees 2021)")
 ```
