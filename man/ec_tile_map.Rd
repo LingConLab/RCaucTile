@@ -9,7 +9,7 @@ ec_tile_map(
   feature_column = "feature",
   title = NULL,
   title_position = "left",
-  fill_by = "feature",
+  annotate_feature = FALSE,
   abbreviation = TRUE
 )
 }
@@ -22,7 +22,7 @@ ec_tile_map(
 
 \item{title_position}{Character vector of length 1, which specifies the title's position. Possible values are \code{left}, \code{center}, and \code{right}. Default value is \code{left}.}
 
-\item{fill_by}{Character vector of length 1 which specifies, whether internal part of the rectangular should be colored by the language (value \code{language}) or by the feature (value \code{feature}). Default value is \code{feature}.}
+\item{annotate_feature}{Logical variable that specifies, whether to add feature values on the tile. This especially make sense in case of numeric features. Default value is \code{FALSE}.}
 
 \item{abbreviation}{Logical variable that specifies, whether use abbreviations for languages specified in the package. Default value is \code{TRUE}.}
 }
