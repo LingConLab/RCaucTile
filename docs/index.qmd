@@ -25,5 +25,8 @@ ec_tile_map(ec_languages,
             feature_column = "morning_greetings",
             fill_by = "language",
             title = "Morning greetings (Naccarato, Verhees 2021)")
+ec_tile_map(ec_languages,
+            feature_column = "consonant_inventory_size",
+            title = "Consonant inventory size (Moroz 2021)")
 ```
 
