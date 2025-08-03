@@ -3,3 +3,4 @@
 .RData
 .Ruserdata
 RCaucTile.Rproj
+*.~lock*.csv
