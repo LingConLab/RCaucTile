@@ -194,8 +194,8 @@ ec_tile_numeric <- function(data,
 # add a 'text_color' column for the text colors ---------------------------
 
   for_plot$text_color <- ifelse(is.na(for_plot$feature),
-                                "grey70",
-                                "#ffffff")
+                                "grey60",
+                                "grey90")
 
   for_plot |>
     ggplot2::ggplot(ggplot2::aes(x, y,
@@ -203,15 +203,15 @@ ec_tile_numeric <- function(data,
                                  alpha = alpha)) +
     ggplot2::geom_tile(linewidth = 0) +
     ggplot2::annotate(geom = "text",
-                      x = for_plot[for_plot$text_color == "#ffffff",]$x,
-                      y = for_plot[for_plot$text_color == "#ffffff",]$y,
-                      label = for_plot[for_plot$text_color == "#ffffff",]$language,
-                      color = "#ffffff") +
+                      x = for_plot[for_plot$text_color == "grey90",]$x,
+                      y = for_plot[for_plot$text_color == "grey90",]$y,
+                      label = for_plot[for_plot$text_color == "grey90",]$language,
+                      color = "grey90") +
     ggplot2::annotate(geom = "text",
-                      x = for_plot[for_plot$text_color == "grey70",]$x,
-                      y = for_plot[for_plot$text_color == "grey70",]$y,
-                      label = for_plot[for_plot$text_color == "grey70",]$language,
-                      color = "grey70") +
+                      x = for_plot[for_plot$text_color == "grey60",]$x,
+                      y = for_plot[for_plot$text_color == "grey60",]$y,
+                      label = for_plot[for_plot$text_color == "grey60",]$language,
+                      color = "grey60") +
     ggplot2::theme_void() +
     ggplot2::labs(fill = NULL, color = NULL, title = title) +
     ggplot2::theme(legend.position = "bottom",
@@ -228,29 +228,29 @@ ec_tile_categorical <- function(data,
   for_plot <- data
 
   for_plot$text_color <- ifelse(is.na(for_plot$feature),
-                                "grey70",
+                                "grey60",
                                 "#000000")
 
   for_plot |>
     ggplot2::ggplot(ggplot2::aes(x, y,
-                                 fill = feature,
                                  alpha = alpha)) +
-    ggplot2::geom_tile(linewidth = 0) +
+    ggplot2::geom_tile(linewidth = 0, color = "grey90") +
+    ggplot2::geom_tile(aes(fill = feature), linewidth = 0) +
     ggplot2::annotate(geom = "text",
                       x = for_plot[for_plot$text_color == "#000000",]$x,
                       y = for_plot[for_plot$text_color == "#000000",]$y,
                       label = for_plot[for_plot$text_color == "#000000",]$language,
                       color = "#000000") +
     ggplot2::annotate(geom = "text",
-                      x = for_plot[for_plot$text_color == "#ffffff",]$x,
-                      y = for_plot[for_plot$text_color == "#ffffff",]$y,
-                      label = for_plot[for_plot$text_color == "#ffffff",]$language,
-                      color = "#ffffff") +
+                      x = for_plot[for_plot$text_color == "grey90",]$x,
+                      y = for_plot[for_plot$text_color == "grey90",]$y,
+                      label = for_plot[for_plot$text_color == "grey90",]$language,
+                      color = "grey90") +
     ggplot2::annotate(geom = "text",
-                      x = for_plot[for_plot$text_color == "grey70",]$x,
-                      y = for_plot[for_plot$text_color == "grey70",]$y,
-                      label = for_plot[for_plot$text_color == "grey70",]$language,
-                      color = "grey70") +
+                      x = for_plot[for_plot$text_color == "grey60",]$x,
+                      y = for_plot[for_plot$text_color == "grey60",]$y,
+                      label = for_plot[for_plot$text_color == "grey60",]$language,
+                      color = "grey60") +
     ggplot2::theme_void() +
     ggplot2::labs(fill = NULL, color = NULL, title = title) +
     ggplot2::theme(legend.position = "bottom",
@@ -270,5 +270,5 @@ define_annotation_color <- function(colors){
             colors_for_text$green*0.587 +
             colors_for_text$blue*0.114) > 160,
          "#000000",
-         "#ffffff")
+         "grey90")
 }

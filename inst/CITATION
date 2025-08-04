@@ -1,4 +1,6 @@
 bibentry(bibtype = "Manual",
+         textVersion = "Moroz, George (2025). RCaucTile: Tile Grid Maps for East Caucasian Languages.",
+         header = "To cite RCaucTile in publications, please use"
          title = "{RCaucTile}: {T}ile {G}rid {M}aps for {E}ast {C}aucasian {L}anguages",
-         author = "Moroz, George and Termus, Vlada",
+         author = "Moroz, George",
          year = "2025")
