@@ -10,6 +10,6 @@ Here are several examples of the result tile maps.
 
 ![](docs/index_files/figure-html/unnamed-chunk-16-1.png)
 
-![](docs/index_files/figure-html/unnamed-chunk-13-1.png)
+![](docs/index_files/figure-html/unnamed-chunk-13-3.png)
 
 I would like to thank Yura Koryakov, Kostya Filatov, Ira Politova and Vlada Termus for the help with preparing language template.
