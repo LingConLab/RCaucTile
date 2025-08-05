@@ -175,7 +175,7 @@ ec_template <- function(title,
     ggplot2::geom_text(ggplot2::aes(label = language, color = text_color),
                        show.legend = FALSE) +
     ggplot2::theme_void() +
-    ggplot2::scale_fill_manual(values = ec_languages$language_color) +
+    ggplot2::scale_fill_manual(values = RCaucTile::ec_languages$language_color) +
     ggplot2::scale_color_manual(values = c("black", "white")) +
     ggplot2::labs(color = NULL, title = title) +
     ggplot2::theme(plot.title = ggplot2::element_text(hjust = title_position))
@@ -186,6 +186,12 @@ ec_tile_numeric <- function(data,
                             title_position,
                             annotate_feature,
                             abbreviation){
+# fake variables for R CMD check to be succeedded -------------------------
+
+  x <- NULL
+  y <- NULL
+  feature <- NULL
+  alpha <- NULL
 
 # load data ---------------------------------------------------------------
 
@@ -196,6 +202,8 @@ ec_tile_numeric <- function(data,
   for_plot$text_color <- ifelse(is.na(for_plot$feature),
                                 "grey60",
                                 "grey90")
+
+# create a map ------------------------------------------------------------
 
   for_plot |>
     ggplot2::ggplot(ggplot2::aes(x, y,
@@ -225,11 +233,25 @@ ec_tile_categorical <- function(data,
                                 fill_by,
                                 annotate_feature,
                                 abbreviation){
+
+# fake variables for R CMD check to be succeedded -------------------------
+
+  x <- NULL
+  y <- NULL
+  feature <- NULL
+  alpha <- NULL
+
+# load data ---------------------------------------------------------------
+
   for_plot <- data
+
+# add a 'text_color' column for the text colors ---------------------------
 
   for_plot$text_color <- ifelse(is.na(for_plot$feature),
                                 "grey60",
                                 "#000000")
+
+# create a map ------------------------------------------------------------
 
   for_plot |>
     ggplot2::ggplot(ggplot2::aes(x, y,
