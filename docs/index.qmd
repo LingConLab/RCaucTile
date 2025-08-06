@@ -178,3 +178,16 @@ ec_tile_map(ec_languages,
             title = "Morning greetings (Naccarato, Verhees 2021)")+
   scale_fill_manual(values = c("#D81E05", "#0070A1", "#00923F"), na.translate = FALSE)
 ```
+
+## Changing values order
+
+The default order of values in R is alphabetical. To impose a different order, you can use the `factor()` function. This function doesn't change the values themselves, but it instructs R to treat an input vector as ordered. This can be important for features with a natural order.  For example, the following demonstrates how to override the default alphabetical order using `factor()`.
+
+```{r}
+df <- data.frame(language = c("Avar", "Chechen", "Mehweb"),
+                 feature = c("value a", "value b", "value b"))
+
+df$feature <- factor(df$feature, levels = c("value b", "value a"))
+
+ec_tile_map(df)
+```
