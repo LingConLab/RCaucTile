@@ -27,4 +27,9 @@ ec_languages
 A dataset containes metadata on East Caucasian languages that helps
 RCaucTile to function.
 }
+\references{
+Moroz, George (2021). “On phonology of East Caucasian languages”. In: Typological Atlas of the Languages of Daghestan (TALD), v 2.0.0. Ed. by Michael Daniel, Konstantin Filatov, Timur Maisak, George Moroz, Timofey Mukhin, Chiara Naccarato and Samira Verhees. Moscow: Linguistic Convergence Laboratory, NRU HSE. DOI: 10.5281/zenodo.6807070. https://lingconlab.ru/tald.
+
+Naccarato, Chiara and Samira Verhees (2021). “Morning greetings”. In: Typological Atlas of the Languages of Daghestan (TALD), v 2.0.0. Ed. by Michael Daniel, Konstantin Filatov, Timur Maisak, George Moroz, Timofey Mukhin, Chiara Naccarato and Samira Verhees. Moscow: Linguistic Convergence Laboratory, NRU HSE. DOI: 10.5281/zenodo.6807070. https://lingconlab.ru/tald.
+}
 \keyword{datasets}

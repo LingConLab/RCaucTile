@@ -86,8 +86,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation"><span class="header-section-number">2</span> Installation</a></li>
   <li><a href="#how-to-use-rcauctile" id="toc-how-to-use-rcauctile" class="nav-link" data-scroll-target="#how-to-use-rcauctile"><span class="header-section-number">3</span> How to use <code>RCaucTile</code></a></li>
-  <li><a href="#changing-the-default-colors" id="toc-changing-the-default-colors" class="nav-link" data-scroll-target="#changing-the-default-colors"><span class="header-section-number">4</span> Changing the Default Colors</a></li>
-  <li><a href="#changing-values-order" id="toc-changing-values-order" class="nav-link" data-scroll-target="#changing-values-order"><span class="header-section-number">5</span> Changing values order</a></li>
+  <li><a href="#changing-the-default-colors" id="toc-changing-the-default-colors" class="nav-link" data-scroll-target="#changing-the-default-colors"><span class="header-section-number">4</span> Changing the default colors</a></li>
+  <li><a href="#changing-values-order" id="toc-changing-values-order" class="nav-link" data-scroll-target="#changing-values-order"><span class="header-section-number">5</span> Changing values’ order</a></li>
+  <li><a href="#changing-the-language-template" id="toc-changing-the-language-template" class="nav-link" data-scroll-target="#changing-the-language-template"><span class="header-section-number">6</span> Changing the language template</a></li>
   </ul>
 </nav>
 </div>
@@ -95,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">RCaucTile: Tile Grid Maps for East Caucasian Languages</h1>
+<h1 class="title"><code>RCaucTile</code>: Tile Grid Maps for East Caucasian Languages</h1>
 </div>
 
 
@@ -280,7 +281,7 @@ A BibTeX entry for LaTeX users is
 </div>
 </section>
 <section id="changing-the-default-colors" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="changing-the-default-colors"><span class="header-section-number">4</span> Changing the Default Colors</h2>
+<h2 data-number="4" class="anchored" data-anchor-id="changing-the-default-colors"><span class="header-section-number">4</span> Changing the default colors</h2>
 <p>It is possible that the default colors provided by <code>ggplot2</code> are not suitable for your plots. So <code>ggplot2</code> provides several tools for changing them. The function <code>scale_fill_distiller()</code> will help to change the colors of numeric variables to one of the predefined palettes (<code>Blues</code>, <code>BuGn</code>, <code>BuPu</code>, <code>GnBu</code>, <code>Greens</code>, <code>Grey</code>, <code>Oranges</code>, <code>OrRd</code>, <code>PuBu</code>, <code>PuBuGn</code>, <code>PuRd</code>, <code>Purples</code>, <code>RdPus</code>, <code>Reds</code>, <code>YlGn</code>, <code>YlGnBu</code>, <code>YlOrBr</code>, <code>YlOrRd</code>). There is a <code>direction</code> argument that makes it possible to reverse the order of the colors in the palette.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -378,7 +379,7 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 </div>
 </section>
 <section id="changing-values-order" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="changing-values-order"><span class="header-section-number">5</span> Changing values order</h2>
+<h2 data-number="5" class="anchored" data-anchor-id="changing-values-order"><span class="header-section-number">5</span> Changing values’ order</h2>
 <p>The default order of values in R is alphabetical. To impose a different order, you can use the <code>factor()</code> function. This function doesn’t change the values themselves, but it instructs R to treat an input vector as ordered. This can be important for features with a natural order. For example, the following demonstrates how to override the default alphabetical order using <code>factor()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Avar"</span>, <span class="st">"Chechen"</span>, <span class="st">"Mehweb"</span>),</span>
@@ -395,6 +396,25 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 </div>
 </div>
 </div>
+</section>
+<section id="changing-the-language-template" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="changing-the-language-template"><span class="header-section-number">6</span> Changing the language template</h2>
+<p>The East Caucasian language family exhibits significant dialectal differentiation. A unified genealogical classification of all idioms spoken in Daghestan does not exist. The default language inventory in <code>RCaucTile</code> is based on the genealogical classification from the Typological Atlas of the Languages of Daghestan (see <a href="https://lingconlab.ru/tald/languages.html">the languages page</a>). Therefore, it is highly probable that some researchers may wish to modify the default inventory by removing or altering the names of existing units.</p>
+<p>To remove specific languages from the template, list the desired languages in the <code>remove_languages</code> argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">remove_languages =</span> <span class="fu">c</span>(<span class="st">"Gigatli"</span>, <span class="st">"Shari"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to change the names of existing languages in the template, you need …</p>
 </section>
 
 </main>

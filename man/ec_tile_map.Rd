@@ -10,7 +10,8 @@ ec_tile_map(
   title = NULL,
   title_position = "left",
   annotate_feature = FALSE,
-  abbreviation = TRUE
+  abbreviation = TRUE,
+  hide_languages = NULL
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ ec_tile_map(
 \item{annotate_feature}{Logical variable that specifies, whether to add feature values on the tile. This especially make sense in case of numeric features. Default value is \code{FALSE}.}
 
 \item{abbreviation}{Logical variable that specifies, whether use abbreviations for languages specified in the package. Default value is \code{TRUE}.}
+
+\item{hide_languages}{Character variable that specifies, which languages should be removed from the template.}
 }
 \value{
 a `ggplot2` object
@@ -34,8 +37,14 @@ Draw a grid tile map for East Caucasian languages.
 }
 \examples{
 ec_tile_map()
+
 ec_tile_map(ec_languages,
             feature_column = "morning_greetings",
             title = "Morning greetings (Naccarato, Verhees 2021)")
+
+ec_tile_map(ec_languages,
+            feature_column = "consonant_inventory_size",
+            title = "Consonant inventory size (Moroz 2021)",
+            annotate_feature = TRUE)
 
 }

@@ -6,15 +6,22 @@
 #' @param title_position Character vector of length 1, which specifies the title's position. Possible values are \code{left}, \code{center}, and \code{right}. Default value is \code{left}.
 #' @param annotate_feature Logical variable that specifies, whether to add feature values on the tile. This especially make sense in case of numeric features. Default value is \code{FALSE}.
 #' @param abbreviation Logical variable that specifies, whether use abbreviations for languages specified in the package. Default value is \code{TRUE}.
+#' @param hide_languages Character variable that specifies, which languages should be removed from the template.
 #'
 #' @returns a `ggplot2` object
 #' @export
 #'
 #' @examples
 #' ec_tile_map()
+#'
 #' ec_tile_map(ec_languages,
 #'             feature_column = "morning_greetings",
 #'             title = "Morning greetings (Naccarato, Verhees 2021)")
+#'
+#' ec_tile_map(ec_languages,
+#'             feature_column = "consonant_inventory_size",
+#'             title = "Consonant inventory size (Moroz 2021)",
+#'             annotate_feature = TRUE)
 #'
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 aes
@@ -31,13 +38,14 @@
 #' @export
 
 ec_tile_map <- function(data = NULL,
-                         feature_column = "feature",
-                         title = NULL,
-                         title_position = "left",
-                         annotate_feature = FALSE,
-                         abbreviation = TRUE) {
+                        feature_column = "feature",
+                        title = NULL,
+                        title_position = "left",
+                        annotate_feature = FALSE,
+                        abbreviation = TRUE,
+                        hide_languages = NULL) {
 
-# arguments check ---------------------------------------------------------
+  # arguments check ---------------------------------------------------------
 
   stopifnot("The argument 'title' should be a character vector with one value" =
               length(title) <= 1,
@@ -54,9 +62,14 @@ ec_tile_map <- function(data = NULL,
             "The argument 'abbreviation' should be a logical vector with one value" =
               length(abbreviation) == 1,
             "The argument 'abbreviation' should be a logical vector with one value" =
-              is.logical(abbreviation))
+              is.logical(abbreviation),
+            "The argument 'hide_languages' should be a character vector with languages, see 'ec_languages$language' for the possible values" =
+              is.character(hide_languages) | is.null(hide_languages),
+            "The argument 'hide_languages' should be a character vector with languages, see 'ec_languages$language' for the possible values" =
+              is.null(hide_languages) |
+              hide_languages %in% RCaucTile::ec_languages$language)
 
-# redefine title_position -------------------------------------------------
+  # redefine title_position -------------------------------------------------
 
   if(title_position == "left") {
     title_position <- 0
@@ -66,7 +79,7 @@ ec_tile_map <- function(data = NULL,
     title_position <- 1
   }
 
-# ec_template() assignment ------------------------------------------------
+  # ec_template() assignment ------------------------------------------------
 
   if(is.null(data)){
     ec_template(title = title,
@@ -74,7 +87,7 @@ ec_tile_map <- function(data = NULL,
                 abbreviation = abbreviation)
   } else {
 
-# arguments check ---------------------------------------------------------
+    # arguments check ---------------------------------------------------------
 
     stopifnot(
       "Data should be a dataframe" =
@@ -86,19 +99,23 @@ ec_tile_map <- function(data = NULL,
       "The argument 'feature_column' should be a character vector with one value" =
         length(feature_column) == 1)
 
-# merge EC dataset with data provided by a user ---------------------------
+    # merge EC dataset with data provided by a user ---------------------------
 
     for_plot <- merge(RCaucTile::ec_languages, data, all.x = TRUE)
 
-# create a column with the name feature if there is no one ----------------
+    if(!is.null(hide_languages)){
+      for_plot <- for_plot[!(for_plot$language %in% hide_languages), ]
+    }
+
+    # create a column with the name feature if there is no one ----------------
 
     names(for_plot)[names(for_plot) == feature_column] <- "feature"
 
-# add an 'alpha' column for the cases when there are NAs in data ----------
+    # add an 'alpha' column for the cases when there are NAs in data ----------
 
     for_plot$alpha <- ifelse(is.na(for_plot$feature), 0.2, 1)
 
-# change labels to abbreviations ------------------------------------------
+    # change labels to abbreviations ------------------------------------------
 
     if(isTRUE(abbreviation)){
       for_plot$language <- ifelse(is.na(for_plot$abbreviation),
@@ -106,7 +123,7 @@ ec_tile_map <- function(data = NULL,
                                   for_plot$abbreviation)
     }
 
-# add feature values to the language names --------------------------------
+    # add feature values to the language names --------------------------------
 
     if(isTRUE(annotate_feature)){
       for_plot$language <- ifelse(is.na(for_plot$feature),
@@ -114,7 +131,7 @@ ec_tile_map <- function(data = NULL,
                                   paste0(for_plot$language, "\n", for_plot$feature))
     }
 
-# ec_tile_numeric() or ec_tile_categorical() ------------------------------
+    # ec_tile_numeric() or ec_tile_categorical() ------------------------------
 
     if(is.numeric(for_plot$feature)){
       ec_tile_numeric(data = for_plot,
@@ -136,7 +153,7 @@ ec_template <- function(title,
                         title_position,
                         abbreviation){
 
-# fake variables for R CMD check to be succeedded -------------------------
+  # fake variables for R CMD check to be succeedded -------------------------
 
   x <- NULL
   y <- NULL
@@ -146,20 +163,20 @@ ec_template <- function(title,
   language <- NULL
   text_color <- NULL
 
-# load data ---------------------------------------------------------------
+  # load data ---------------------------------------------------------------
 
   for_plot <- RCaucTile::ec_languages
 
-# add a 'text_color' column for the text colors ---------------------------
+  # add a 'text_color' column for the text colors ---------------------------
 
   for_plot$text_color <- define_annotation_color(for_plot$language_color)
 
-# create a factor for correct coloring in ggplot --------------------------
+  # create a factor for correct coloring in ggplot --------------------------
 
   for_plot$language_color <- factor(for_plot$language_color,
                                     levels = for_plot$language_color)
 
-# change labels to abbreviations ------------------------------------------
+  # change labels to abbreviations ------------------------------------------
 
   if(isTRUE(abbreviation)){
     for_plot$language <- ifelse(is.na(for_plot$abbreviation),
@@ -167,7 +184,7 @@ ec_template <- function(title,
                                 for_plot$abbreviation)
   }
 
-# create a map ------------------------------------------------------------
+  # create a map ------------------------------------------------------------
 
   for_plot |>
     ggplot2::ggplot(ggplot2::aes(x, y)) +
@@ -186,24 +203,24 @@ ec_tile_numeric <- function(data,
                             title_position,
                             annotate_feature,
                             abbreviation){
-# fake variables for R CMD check to be succeedded -------------------------
+  # fake variables for R CMD check to be succeedded -------------------------
 
   x <- NULL
   y <- NULL
   feature <- NULL
   alpha <- NULL
 
-# load data ---------------------------------------------------------------
+  # load data ---------------------------------------------------------------
 
   for_plot <- data
 
-# add a 'text_color' column for the text colors ---------------------------
+  # add a 'text_color' column for the text colors ---------------------------
 
   for_plot$text_color <- ifelse(is.na(for_plot$feature),
                                 "grey60",
                                 "grey90")
 
-# create a map ------------------------------------------------------------
+  # create a map ------------------------------------------------------------
 
   for_plot |>
     ggplot2::ggplot(ggplot2::aes(x, y,
@@ -234,24 +251,24 @@ ec_tile_categorical <- function(data,
                                 annotate_feature,
                                 abbreviation){
 
-# fake variables for R CMD check to be succeedded -------------------------
+  # fake variables for R CMD check to be succeedded -------------------------
 
   x <- NULL
   y <- NULL
   feature <- NULL
   alpha <- NULL
 
-# load data ---------------------------------------------------------------
+  # load data ---------------------------------------------------------------
 
   for_plot <- data
 
-# add a 'text_color' column for the text colors ---------------------------
+  # add a 'text_color' column for the text colors ---------------------------
 
   for_plot$text_color <- ifelse(is.na(for_plot$feature),
                                 "grey60",
                                 "#000000")
 
-# create a map ------------------------------------------------------------
+  # create a map ------------------------------------------------------------
 
   for_plot |>
     ggplot2::ggplot(ggplot2::aes(x, y,

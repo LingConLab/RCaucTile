@@ -1,5 +1,5 @@
 ---
-title: "RCaucTile: Tile Grid Maps for East Caucasian Languages"
+title: "`RCaucTile`: Tile Grid Maps for East Caucasian Languages"
 format: html
 fig-width: 12
 fig-height: 9
@@ -121,7 +121,7 @@ ec_tile_map(ec_languages,
             annotate_feature = TRUE)
 ```
 
-## Changing the Default Colors
+## Changing the default colors
 
 It is possible that the default colors provided by `ggplot2` are not suitable for your plots. So `ggplot2` provides several tools for changing them. The function `scale_fill_distiller()` will help to change the colors of numeric variables to one of the predefined palettes (`Blues`, `BuGn`, `BuPu`, `GnBu`, `Greens`, `Grey`, `Oranges`, `OrRd`, `PuBu`, `PuBuGn`, `PuRd`, `Purples`, `RdPus`, `Reds`, `YlGn`, `YlGnBu`, `YlOrBr`, `YlOrRd`). There is a `direction` argument that makes it possible to reverse the order of the colors in the palette.
 
@@ -179,7 +179,7 @@ ec_tile_map(ec_languages,
   scale_fill_manual(values = c("#D81E05", "#0070A1", "#00923F"), na.translate = FALSE)
 ```
 
-## Changing values order
+## Changing values' order
 
 The default order of values in R is alphabetical. To impose a different order, you can use the `factor()` function. This function doesn't change the values themselves, but it instructs R to treat an input vector as ordered. This can be important for features with a natural order.  For example, the following demonstrates how to override the default alphabetical order using `factor()`.
 
@@ -191,3 +191,18 @@ df$feature <- factor(df$feature, levels = c("value b", "value a"))
 
 ec_tile_map(df)
 ```
+
+## Changing the language template
+
+The East Caucasian language family exhibits significant dialectal differentiation. A unified genealogical classification of all idioms spoken in Daghestan does not exist. The default language inventory in `RCaucTile` is based on the genealogical classification from the Typological Atlas of the Languages of Daghestan (see [the languages page](https://lingconlab.ru/tald/languages.html)). Therefore, it is highly probable that some researchers may wish to modify the default inventory by removing or altering the names of existing units.
+
+To remove specific languages from the template, list the desired languages in the `hide_languages` argument.
+
+```{r}
+ec_tile_map(ec_languages,
+            feature_column = "morning_greetings",
+            title = "Morning greetings (Naccarato, Verhees 2021)",
+            hide_languages = c("Gigatli", "Shari"))
+```
+
+In order to change the names of existing languages in the template, you need ...
