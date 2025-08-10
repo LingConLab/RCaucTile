@@ -11,7 +11,8 @@ ec_tile_map(
   title_position = "left",
   annotate_feature = FALSE,
   abbreviation = TRUE,
-  hide_languages = NULL
+  hide_languages = NULL,
+  rename_languages = NULL
 )
 }
 \arguments{
@@ -28,6 +29,11 @@ ec_tile_map(
 \item{abbreviation}{Logical variable that specifies, whether use abbreviations for languages specified in the package. Default value is \code{TRUE}.}
 
 \item{hide_languages}{Character variable that specifies, which languages should be removed from the template.}
+
+\item{rename_languages}{This variable maps old language names to their corresponding new names. It can be represented as either:
+\itemize{
+\item{A named vector, where names are the old language names and values are the corresponding new language names.}
+\item{A data frame with two columns: \code{language} (the old language names) and \code{new_language_name} (the corresponding new language names).}}}
 }
 \value{
 a `ggplot2` object

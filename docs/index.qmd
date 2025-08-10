@@ -205,4 +205,35 @@ ec_tile_map(ec_languages,
             hide_languages = c("Gigatli", "Shari"))
 ```
 
-In order to change the names of existing languages in the template, you need ...
+In order to change the names of existing languages in the template, you need to provide the `rename_languages` argument with an object that maps old language names to their corresponding new names. This can be represented as either:
+
+- A named vector, where the names are the old language names and the values are the corresponding new language names.
+
+```{r}
+new_language_names <- c("Upper Andi" = "Andi",
+                        "Northern Akhvakh" = "Akhvakh")
+
+ec_tile_map(ec_languages,
+            feature_column = "morning_greetings",
+            title = "Morning greetings (Naccarato, Verhees 2021)",
+            hide_languages = c("Lower Andi", "Southern Akhvakh"),
+            rename_languages = new_language_names)
+```
+
+- A data frame with two columns: `language` (the old language names) and `new_language_name` (the corresponding new language names).
+
+```{r}
+new_language_names <- data.frame(language = c("Upper Andi", "Northern Akhvakh"),
+                                 new_language_name = c("Andi", "Akhvakh"))
+
+ec_tile_map(ec_languages,
+            feature_column = "morning_greetings",
+            title = "Morning greetings (Naccarato, Verhees 2021)",
+            hide_languages = c("Lower Andi", "Southern Akhvakh"),
+            rename_languages = new_language_names)
+```
+
+As shown in the example above, we merged:
+
+- Upper and Lower Andi into the joint "Andi" variable;
+- Southern and Northern Akhvakh into the joint "Akhvakh" variable.

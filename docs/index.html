@@ -400,12 +400,12 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 <section id="changing-the-language-template" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="changing-the-language-template"><span class="header-section-number">6</span> Changing the language template</h2>
 <p>The East Caucasian language family exhibits significant dialectal differentiation. A unified genealogical classification of all idioms spoken in Daghestan does not exist. The default language inventory in <code>RCaucTile</code> is based on the genealogical classification from the Typological Atlas of the Languages of Daghestan (see <a href="https://lingconlab.ru/tald/languages.html">the languages page</a>). Therefore, it is highly probable that some researchers may wish to modify the default inventory by removing or altering the names of existing units.</p>
-<p>To remove specific languages from the template, list the desired languages in the <code>remove_languages</code> argument.</p>
+<p>To remove specific languages from the template, list the desired languages in the <code>hide_languages</code> argument.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">remove_languages =</span> <span class="fu">c</span>(<span class="st">"Gigatli"</span>, <span class="st">"Shari"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Gigatli"</span>, <span class="st">"Shari"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -414,7 +414,52 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 </div>
 </div>
 </div>
-<p>In order to change the names of existing languages in the template, you need …</p>
+<p>In order to change the names of existing languages in the template, you need to provide the <code>rename_languages</code> argument with an object that maps old language names to their corresponding new names. This can be represented as either:</p>
+<ul>
+<li>A named vector, where the names are the old language names and the values are the corresponding new language names.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span> <span class="ot">=</span> <span class="st">"Andi"</span>,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Northern Akhvakh"</span> <span class="ot">=</span> <span class="st">"Akhvakh"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>A data frame with two columns: <code>language</code> (the old language names) and <code>new_language_name</code> (the corresponding new language names).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span>, <span class="st">"Northern Akhvakh"</span>),</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">new_language_name =</span> <span class="fu">c</span>(<span class="st">"Andi"</span>, <span class="st">"Akhvakh"</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As shown in the example above, we merged:</p>
+<ul>
+<li>Upper and Lower Andi into the joint “Andi” variable;</li>
+<li>Southern and Northern Akhvakh into the joint “Akhvakh” variable.</li>
+</ul>
 </section>
 
 </main>

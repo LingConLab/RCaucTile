@@ -7,6 +7,10 @@
 #' @param annotate_feature Logical variable that specifies, whether to add feature values on the tile. This especially make sense in case of numeric features. Default value is \code{FALSE}.
 #' @param abbreviation Logical variable that specifies, whether use abbreviations for languages specified in the package. Default value is \code{TRUE}.
 #' @param hide_languages Character variable that specifies, which languages should be removed from the template.
+#' @param rename_languages This variable maps old language names to their corresponding new names. It can be represented as either:
+#' \itemize{
+#' \item{A named vector, where names are the old language names and values are the corresponding new language names.}
+#' \item{A data frame with two columns: \code{language} (the old language names) and \code{new_language_name} (the corresponding new language names).}}
 #'
 #' @returns a `ggplot2` object
 #' @export
@@ -43,7 +47,8 @@ ec_tile_map <- function(data = NULL,
                         title_position = "left",
                         annotate_feature = FALSE,
                         abbreviation = TRUE,
-                        hide_languages = NULL) {
+                        hide_languages = NULL,
+                        rename_languages = NULL) {
 
   # arguments check ---------------------------------------------------------
 
@@ -67,9 +72,33 @@ ec_tile_map <- function(data = NULL,
               is.character(hide_languages) | is.null(hide_languages),
             "The argument 'hide_languages' should be a character vector with languages, see 'ec_languages$language' for the possible values" =
               is.null(hide_languages) |
-              hide_languages %in% RCaucTile::ec_languages$language)
+              hide_languages %in% RCaucTile::ec_languages$language,
+            "The argument 'rename_languages' should be either a named character vector with languages as a name or dataframe with columns 'language' and 'new_language_name', see 'ec_languages$language' for the possible values" =
+              is.null(rename_languages) | "character" %in% class(rename_languages) | "data.frame" %in% class(rename_languages))
 
-  # redefine title_position -------------------------------------------------
+  if("data.frame" %in% class(rename_languages)){
+    stopifnot(
+      "The argument 'rename_languages' should be either a named character vector with languages as a name or dataframe with columns 'language' and 'new_language_name', see 'ec_languages$language' for the possible values" =
+        "language" %in% colnames(rename_languages),
+      "The argument 'rename_languages' should be either a named character vector with languages as a name or dataframe with columns 'language' and 'new_language_name', see 'ec_languages$language' for the possible values" =
+        "new_language_name" %in% colnames(rename_languages),
+      "The 'language' column in 'rename_languages' contains unexpected values, see 'ec_languages$language' for the possible values" =
+        rename_languages$language %in% RCaucTile::ec_languages$language)
+  } else if("character" %in% class(rename_languages)){
+    stopifnot(
+      "The names in 'rename_languages' contain unexpected values, see 'ec_languages$language' for the possible values" =
+        names(rename_languages) %in% RCaucTile::ec_languages$language)
+  }
+
+# restructure rename_languages --------------------------------------------
+
+  if("character" %in% class(rename_languages)){
+    rename_languages <- as.data.frame(rename_languages)
+    colnames(rename_languages) <- "new_language_name"
+    rename_languages$language <- rownames(rename_languages)
+  }
+
+# redefine title_position -------------------------------------------------
 
   if(title_position == "left") {
     title_position <- 0
@@ -99,15 +128,30 @@ ec_tile_map <- function(data = NULL,
       "The argument 'feature_column' should be a character vector with one value" =
         length(feature_column) == 1)
 
-    # merge EC dataset with data provided by a user ---------------------------
+# merge EC dataset with data provided by a user ---------------------------
 
     for_plot <- merge(RCaucTile::ec_languages, data, all.x = TRUE)
+
+
+# rename languages --------------------------------------------------------
+
+    if(!is.null(rename_languages)){
+      for_plot <- merge(for_plot, rename_languages, all.x = TRUE)
+      for_plot$language <- ifelse(is.na(for_plot$new_language_name),
+                                  for_plot$language,
+                                  for_plot$new_language_name)
+      for_plot$abbreviation <- ifelse(is.na(for_plot$new_language_name),
+                                  for_plot$abbreviation,
+                                  for_plot$new_language_name)
+    }
+
+# hide languages ----------------------------------------------------------
 
     if(!is.null(hide_languages)){
       for_plot <- for_plot[!(for_plot$language %in% hide_languages), ]
     }
 
-    # create a column with the name feature if there is no one ----------------
+# create a column with the name feature if there is no one ----------------
 
     names(for_plot)[names(for_plot) == feature_column] <- "feature"
 
