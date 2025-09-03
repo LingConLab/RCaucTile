@@ -186,14 +186,6 @@ A BibTeX entry for LaTeX users is
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Avar"</span>, <span class="st">"Chechen"</span>, <span class="st">"Mehweb"</span>),</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">feature =</span> <span class="fu">c</span>(<span class="st">"value a"</span>, <span class="st">"value b"</span>, <span class="st">"value b"</span>))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -204,16 +196,8 @@ A BibTeX entry for LaTeX users is
 </div>
 <p>Sometimes the name of the variable in the loaded table is not <code>feature</code>, so there is an argument <code>feature_column</code> in the <code>ec_tile_map()</code> function, where the name can be provided:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -221,16 +205,8 @@ A BibTeX entry for LaTeX users is
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -241,17 +217,9 @@ A BibTeX entry for LaTeX users is
 </div>
 <p>It is possible to add title to the plot, using <code>title</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -262,18 +230,10 @@ A BibTeX entry for LaTeX users is
 </div>
 <p>To change the title position (it appears left by default), one can use the <code>title_position</code> argument:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">title_position =</span> <span class="st">"center"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">title_position =</span> <span class="st">"center"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -281,8 +241,8 @@ A BibTeX entry for LaTeX users is
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(<span class="at">title =</span> <span class="st">"This is a Tile map of East Caucasian languages"</span>,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">title_position =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(<span class="at">title =</span> <span class="st">"This is a Tile map of East Caucasian languages"</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">title_position =</span> <span class="st">"right"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -293,18 +253,10 @@ A BibTeX entry for LaTeX users is
 </div>
 <p>It is really hard to understand the real value for each language when a numeric feature is used. So there is an additional argument <code>annotate_feature</code> that makes it possible to add values near the language names:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -315,18 +267,10 @@ A BibTeX entry for LaTeX users is
 </div>
 <p>It is possible to use this with categorical features, however, one needs to keep track of the short values, because it looks messy:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -340,20 +284,12 @@ A BibTeX entry for LaTeX users is
 <h2 data-number="4" class="anchored" data-anchor-id="changing-the-default-colors"><span class="header-section-number">4</span> Changing the default colors</h2>
 <p>It is possible that the default colors provided by <code>ggplot2</code> are not suitable for your plots. So <code>ggplot2</code> provides several tools for changing them. The function <code>scale_fill_distiller()</code> will help to change the colors of numeric variables to one of the predefined palettes (<code>Blues</code>, <code>BuGn</code>, <code>BuPu</code>, <code>GnBu</code>, <code>Greens</code>, <code>Grey</code>, <code>Oranges</code>, <code>OrRd</code>, <code>PuBu</code>, <code>PuBuGn</code>, <code>PuRd</code>, <code>Purples</code>, <code>RdPus</code>, <code>Reds</code>, <code>YlGn</code>, <code>YlGnBu</code>, <code>YlOrBr</code>, <code>YlOrRd</code>). There is a <code>direction</code> argument that makes it possible to reverse the order of the colors in the palette.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -361,15 +297,11 @@ A BibTeX entry for LaTeX users is
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>, <span class="at">direction =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color == : Ignoring unknown parameters: `text`
-Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>, <span class="at">direction =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -380,19 +312,11 @@ Ignoring unknown parameters: `text`</code></pre>
 </div>
 <p>To define your own palette for a numeric variable, you can use the <code>scale_fill_gradient()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"navy"</span>, <span class="at">high =</span> <span class="st">"tomato"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"navy"</span>, <span class="at">high =</span> <span class="st">"tomato"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -403,20 +327,12 @@ Ignoring unknown parameters: `text`</code></pre>
 </div>
 <p>When the color scheme is clear and the <code>annotate_feature</code> argument draws the exact values of the feature, it makes sense to get rid of the legend:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"navy"</span>, <span class="at">high =</span> <span class="st">"tomato"</span>)<span class="sc">+</span></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"navy"</span>, <span class="at">high =</span> <span class="st">"tomato"</span>)<span class="sc">+</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -427,18 +343,10 @@ Ignoring unknown parameters: `text`</code></pre>
 </div>
 <p>The function <code>scale_fill_brewer()</code> will help to change the colors of categorical variables to one of the predefined palettes (<code>Accent</code>, <code>Dark2</code>, <code>Paired</code>, <code>Pastel1</code>, <code>Pastel2</code>, <code>Set1</code>, <code>Set2</code>, <code>Set3</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>)<span class="sc">+</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>, <span class="at">na.translate =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>)<span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>, <span class="at">na.translate =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.</code></pre>
@@ -453,18 +361,10 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 </div>
 <p>To define your own palette for a categorical variable, you can use the <code>scale_fill_manual()</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>)<span class="sc">+</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#D81E05"</span>, <span class="st">"#0070A1"</span>, <span class="st">"#00923F"</span>), <span class="at">na.translate =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>)<span class="sc">+</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#D81E05"</span>, <span class="st">"#0070A1"</span>, <span class="st">"#00923F"</span>), <span class="at">na.translate =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Scale for fill is already present.
 Adding another scale for fill, which will replace the existing scale.</code></pre>
@@ -482,20 +382,12 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 <h2 data-number="5" class="anchored" data-anchor-id="changing-values-order"><span class="header-section-number">5</span> Changing values’ order</h2>
 <p>The default order of values in R is alphabetical. To impose a different order, you can use the <code>factor()</code> function. This function doesn’t change the values themselves, but it instructs R to treat an input vector as ordered. This can be important for features with a natural order. For example, the following demonstrates how to override the default alphabetical order using <code>factor()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Avar"</span>, <span class="st">"Chechen"</span>, <span class="st">"Mehweb"</span>),</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">feature =</span> <span class="fu">c</span>(<span class="st">"value a"</span>, <span class="st">"value b"</span>, <span class="st">"value b"</span>))</span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>feature <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>feature, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"value b"</span>, <span class="st">"value a"</span>))</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Avar"</span>, <span class="st">"Chechen"</span>, <span class="st">"Mehweb"</span>),</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">feature =</span> <span class="fu">c</span>(<span class="st">"value a"</span>, <span class="st">"value b"</span>, <span class="st">"value b"</span>))</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>feature <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>feature, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"value b"</span>, <span class="st">"value a"</span>))</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -510,18 +402,10 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 <p>The East Caucasian language family exhibits significant dialectal differentiation. A unified genealogical classification of all idioms spoken in Daghestan does not exist. The default language inventory in <code>RCaucTile</code> is based on the genealogical classification from the Typological Atlas of the Languages of Daghestan (see <a href="https://lingconlab.ru/tald/languages.html">the languages page</a>). Therefore, it is highly probable that some researchers may wish to modify the default inventory by removing or altering the names of existing units.</p>
 <p>To remove specific languages from the template, list the desired languages in the <code>hide_languages</code> argument.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Gigatli"</span>, <span class="st">"Shari"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Gigatli"</span>, <span class="st">"Shari"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -535,22 +419,14 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 <li>A named vector, where the names are the old language names and the values are the corresponding new language names.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span> <span class="ot">=</span> <span class="st">"Andi"</span>,</span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Northern Akhvakh"</span> <span class="ot">=</span> <span class="st">"Akhvakh"</span>)</span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span> <span class="ot">=</span> <span class="st">"Andi"</span>,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Northern Akhvakh"</span> <span class="ot">=</span> <span class="st">"Akhvakh"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -563,22 +439,14 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 <li>A data frame with two columns: <code>language</code> (the old language names) and <code>new_language_name</code> (the corresponding new language names).</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span>, <span class="st">"Northern Akhvakh"</span>),</span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">new_language_name =</span> <span class="fu">c</span>(<span class="st">"Andi"</span>, <span class="st">"Akhvakh"</span>))</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in ggplot2::annotate(geom = "text", x = for_plot[for_plot$text_color ==
-: Ignoring unknown parameters: `text`</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span>, <span class="st">"Northern Akhvakh"</span>),</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">new_language_name =</span> <span class="fu">c</span>(<span class="st">"Andi"</span>, <span class="st">"Akhvakh"</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -592,15 +460,6 @@ Adding another scale for fill, which will replace the existing scale.</code></pr
 <li>Upper and Lower Andi into the joint “Andi” variable;</li>
 <li>Southern and Northern Akhvakh into the joint “Akhvakh” variable.</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
-<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>)</span>
-<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(p1, <span class="at">tooltip =</span> <span class="fu">c</span>(<span class="st">"text"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 
 </main>
