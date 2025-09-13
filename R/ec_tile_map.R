@@ -325,11 +325,6 @@ ec_tile_categorical <- function(data,
                       label = for_plot[for_plot$text_color == "#000000",]$language,
                       color = "#000000") +
     ggplot2::annotate(geom = "text",
-                      x = for_plot[for_plot$text_color == "grey90",]$x,
-                      y = for_plot[for_plot$text_color == "grey90",]$y,
-                      label = for_plot[for_plot$text_color == "grey90",]$language,
-                      color = "grey90") +
-    ggplot2::annotate(geom = "text",
                       x = for_plot[for_plot$text_color == "grey60",]$x,
                       y = for_plot[for_plot$text_color == "grey60",]$y,
                       label = for_plot[for_plot$text_color == "grey60",]$language,

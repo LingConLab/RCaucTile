@@ -1,7 +1,7 @@
 Package: RCaucTile
 Type: Package
 Title: Tile Grid Maps for East Caucasian Languages
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: person("George", "Moroz",
                   role = c("aut", "cre"),
                   email = "agricolamz@gmail.com",
@@ -12,4 +12,4 @@ Encoding: UTF-8
 LazyData: true
 Depends: R (>= 4.1.0)
 Imports: ggplot2
-RoxygenNote: 7.3.2.9000
+RoxygenNote: 7.3.3
