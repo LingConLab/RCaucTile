@@ -12,7 +12,8 @@ ec_tile_map(
   annotate_feature = FALSE,
   abbreviation = TRUE,
   hide_languages = NULL,
-  rename_languages = NULL
+  rename_languages = NULL,
+  tile_colors = NULL
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ ec_tile_map(
 \itemize{
 \item{A named vector, where names are the old language names and values are the corresponding new language names.}
 \item{A data frame with two columns: \code{language} (the old language names) and \code{new_language_name} (the corresponding new language names).}}}
+
+\item{tile_colors}{Character variable that specifies the color of the tiles according to variable levels. It is also possible to use pallettes from \code{RColorBrewer} and \code{viridis} packages.}
 }
 \value{
 a `ggplot2` object

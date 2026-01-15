@@ -11,6 +11,7 @@
 #' \itemize{
 #' \item{A named vector, where names are the old language names and values are the corresponding new language names.}
 #' \item{A data frame with two columns: \code{language} (the old language names) and \code{new_language_name} (the corresponding new language names).}}
+#' @param tile_colors Character variable that specifies the color of the tiles according to variable levels. It is also possible to use pallettes from \code{RColorBrewer} and \code{viridis} packages.
 #'
 #' @returns a `ggplot2` object
 #' @export
@@ -39,6 +40,17 @@
 #' @importFrom ggplot2 element_text
 #' @importFrom ggplot2 guides
 #' @importFrom grDevices col2rgb
+#' @importFrom grDevices hcl
+#' @importFrom RColorBrewer brewer.pal.info
+#' @importFrom RColorBrewer brewer.pal
+#' @importFrom viridis viridis
+#' @importFrom viridis cividis
+#' @importFrom viridis inferno
+#' @importFrom viridis magma
+#' @importFrom viridis mako
+#' @importFrom viridis plasma
+#' @importFrom viridis rocket
+#' @importFrom viridis turbo
 #' @export
 
 ec_tile_map <- function(data = NULL,
@@ -48,7 +60,8 @@ ec_tile_map <- function(data = NULL,
                         annotate_feature = FALSE,
                         abbreviation = TRUE,
                         hide_languages = NULL,
-                        rename_languages = NULL) {
+                        rename_languages = NULL,
+                        tile_colors = NULL) {
 
   # arguments check ---------------------------------------------------------
 
@@ -155,11 +168,11 @@ ec_tile_map <- function(data = NULL,
 
     names(for_plot)[names(for_plot) == feature_column] <- "feature"
 
-    # add an 'alpha' column for the cases when there are NAs in data ----------
+# add an 'alpha' column for the cases when there are NAs in data ----------
 
     for_plot$alpha <- ifelse(is.na(for_plot$feature), 0.2, 1)
 
-    # change labels to abbreviations ------------------------------------------
+# change labels to abbreviations ------------------------------------------
 
     if(isTRUE(abbreviation)){
       for_plot$language <- ifelse(is.na(for_plot$abbreviation),
@@ -167,7 +180,7 @@ ec_tile_map <- function(data = NULL,
                                   for_plot$abbreviation)
     }
 
-    # add feature values to the language names --------------------------------
+# add feature values to the language names --------------------------------
 
     if(isTRUE(annotate_feature)){
       for_plot$language <- ifelse(is.na(for_plot$feature),
@@ -175,20 +188,22 @@ ec_tile_map <- function(data = NULL,
                                   paste0(for_plot$language, "\n", for_plot$feature))
     }
 
-    # ec_tile_numeric() or ec_tile_categorical() ------------------------------
+# ec_tile_numeric() or ec_tile_categorical() ------------------------------
 
     if(is.numeric(for_plot$feature)){
       ec_tile_numeric(data = for_plot,
                       title = title,
                       title_position = title_position,
                       annotate_feature = annotate_feature,
-                      abbreviation = abbreviation)
+                      abbreviation = abbreviation,
+                      tile_colors = tile_colors)
     } else {
       ec_tile_categorical(data = for_plot,
                           title = title,
                           title_position = title_position,
                           annotate_feature = annotate_feature,
-                          abbreviation = abbreviation)
+                          abbreviation = abbreviation,
+                          tile_colors = tile_colors)
     }
   }
 }
@@ -246,7 +261,8 @@ ec_tile_numeric <- function(data,
                             title,
                             title_position,
                             annotate_feature,
-                            abbreviation){
+                            abbreviation,
+                            tile_colors){
   # fake variables for R CMD check to be succeedded -------------------------
 
   x <- NULL
@@ -293,7 +309,8 @@ ec_tile_categorical <- function(data,
                                 title_position,
                                 fill_by,
                                 annotate_feature,
-                                abbreviation){
+                                abbreviation,
+                                tile_colors){
 
   # fake variables for R CMD check to be succeedded -------------------------
 
@@ -301,6 +318,8 @@ ec_tile_categorical <- function(data,
   y <- NULL
   feature <- NULL
   alpha <- NULL
+  text_color <- NULL
+  language <- NULL
 
   # load data ---------------------------------------------------------------
 
@@ -308,9 +327,80 @@ ec_tile_categorical <- function(data,
 
   # add a 'text_color' column for the text colors ---------------------------
 
+  if(is.null(tile_colors)){
+    levels(for_plot$feature) |>
+      length() |>
+      gg_color_hue() ->
+      tile_colors
+  } else if (sum(tile_colors %in% rownames(RColorBrewer::brewer.pal.info)) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      RColorBrewer::brewer.pal(n = _, name = tile_colors) ->
+      tile_colors
+  } else if (sum(tile_colors %in% c("viridis")) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      viridis::viridis(n = _) ->
+      tile_colors
+  } else if (sum(tile_colors %in% c("inferno")) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      viridis::inferno(n = _) ->
+      tile_colors
+  } else if (sum(tile_colors %in% c("magma")) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      viridis::magma(n = _) ->
+      tile_colors
+  } else if (sum(tile_colors %in% c("mako")) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      viridis::mako(n = _) ->
+      tile_colors
+  } else if (sum(tile_colors %in% c("plasma")) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      viridis::plasma(n = _) ->
+      tile_colors
+  } else if (sum(tile_colors %in% c("rocket")) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      viridis::rocket(n = _) ->
+      tile_colors
+  } else if (sum(tile_colors %in% c("turbo")) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      viridis::turbo(n = _) ->
+      tile_colors
+  } else if (sum(tile_colors %in% c("cividis")) > 0){
+    levels(for_plot$feature) |>
+      length() |>
+      viridis::cividis(n = _) ->
+      tile_colors
+  }
+
+  for_color_check <- check_colors(tile_colors)
+  for_color_check[for_color_check %in% FALSE] |>
+    names() ->
+    wrong_color_names
+
+  if(length(wrong_color_names) > 0){
+    paste("We found some cases with the wrong color names:",
+          paste(wrong_color_names, collapse = ", ")) |>
+      stop()
+  }
+
+  stopifnot("Argument 'tile_colors' should be either a vector of length equal to the number of levels in 'feature' columns, either a vector with ColorBrewer palettes" =
+              length(levels(for_plot$feature)) == length(tile_colors))
+
+  for_plot <- merge(for_plot,
+                    data.frame(feature = levels(for_plot$feature),
+                               tile_color = tile_colors),
+                    all.x = TRUE)
+
   for_plot$text_color <- ifelse(is.na(for_plot$feature),
-                                "grey60",
-                                "#000000")
+                                "black",
+                                define_annotation_color(for_plot$tile_color))
 
   # create a map ------------------------------------------------------------
 
@@ -318,23 +408,16 @@ ec_tile_categorical <- function(data,
     ggplot2::ggplot(ggplot2::aes(x, y,
                                  alpha = alpha)) +
     ggplot2::geom_tile(linewidth = 0, color = "grey90") +
-    ggplot2::geom_tile(aes(fill = feature), linewidth = 0) +
-    ggplot2::annotate(geom = "text",
-                      x = for_plot[for_plot$text_color == "#000000",]$x,
-                      y = for_plot[for_plot$text_color == "#000000",]$y,
-                      label = for_plot[for_plot$text_color == "#000000",]$language,
-                      color = "#000000") +
-    ggplot2::annotate(geom = "text",
-                      x = for_plot[for_plot$text_color == "grey60",]$x,
-                      y = for_plot[for_plot$text_color == "grey60",]$y,
-                      label = for_plot[for_plot$text_color == "grey60",]$language,
-                      color = "grey60") +
+    ggplot2::geom_tile(ggplot2::aes(fill = feature), linewidth = 0) +
+    ggplot2::geom_text(ggplot2::aes(color = text_color, label = language)) +
     ggplot2::theme_void() +
     ggplot2::labs(fill = NULL, color = NULL, title = title) +
     ggplot2::theme(legend.position = "bottom",
                    plot.title = ggplot2::element_text(hjust = title_position)) +
-    ggplot2::guides(alpha="none") +
-    ggplot2::scale_fill_discrete(na.translate = FALSE)
+    ggplot2::scale_fill_manual(values = tile_colors, na.translate = FALSE)+
+    ggplot2::scale_color_manual(values = for_plot$text_color |> unique() |> sort())+
+    ggplot2::guides(alpha="none", color = "none")
+
 }
 
 define_annotation_color <- function(colors){
@@ -349,4 +432,16 @@ define_annotation_color <- function(colors){
             colors_for_text$blue*0.114) > 160,
          "#000000",
          "grey90")
+}
+
+gg_color_hue <- function(n) {
+  hues = seq(15, 375, length = n + 1)
+  grDevices::hcl(h = hues, l = 65, c = 100)[1:n]
+}
+
+check_colors <- function(x) {
+  sapply(x, function(color) {
+    tryCatch(is.matrix(grDevices::col2rgb(color)),
+             error = function(e) FALSE)
+  })
 }

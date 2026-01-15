@@ -1,3 +1,6 @@
+RCaucTile 1.0.2
+- add `tile_colors` argument
+
 RCaucTile 1.0.1
 - small update after `ggplot2` 4.0.0
 
