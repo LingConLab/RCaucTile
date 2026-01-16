@@ -153,7 +153,9 @@ ec_tile_map(ec_languages,
             palette_reverse = TRUE)
 ```
 
-To define your own palette for a numeric variable, you can provide 2 or 3 colors defining the lower, upper, and middle segments of the palette.
+To define your own palette for a numeric variable, you can provide 2 or 3 colors[^about_color_names] defining the lower, upper, and middle segments of the palette.
+
+[^about_color_names]: R has over 650 built-in color names that you can use in your plots, which can be accessed by typing `colors()`. It is also possible to use the HEX value of the color, e.g. `"#0000FF"`.
 
 ```{r}
 ec_tile_map(ec_languages,
@@ -169,7 +171,7 @@ ec_tile_map(ec_languages,
             tile_colors = c("navy", "tomato", "yellow"))
 ```
 
-When the color scheme is clear and the `annotate_feature` argument draws the exact values of the feature, it makes sense to get rid of the legend using the `theme()` function from `ggplot2`:
+When the color scheme is clear and the `annotate_feature` argument draws the exact values of the feature, it makes sense to get rid of the legend using the `theme()` function from the `ggplot2` package:
 
 ```{r}
 library(ggplot2)
