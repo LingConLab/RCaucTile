@@ -123,60 +123,76 @@ ec_tile_map(ec_languages,
 
 ## Changing the default colors
 
-It is possible that the default colors provided by `ggplot2` are not suitable for your plots. So `ggplot2` provides several tools for changing them. The function `scale_fill_distiller()` will help to change the colors of numeric variables to one of the predefined palettes (`Blues`, `BuGn`, `BuPu`, `GnBu`, `Greens`, `Grey`, `Oranges`, `OrRd`, `PuBu`, `PuBuGn`, `PuRd`, `Purples`, `RdPus`, `Reds`, `YlGn`, `YlGnBu`, `YlOrBr`, `YlOrRd`). There is a `direction` argument that makes it possible to reverse the order of the colors in the palette.
+It is possible that the default colors provided by `RCaucTile` are not suitable for your plots. The argument `tile_colors()` will help to change the colors of numeric variables to one of the predefined palettes from the `RColorBrewer` package (`Blues`, `BuGn`, `BuPu`, `GnBu`, `Greens`, `Grey`, `Oranges`, `OrRd`, `PuBu`, `PuBuGn`, `PuRd`, `Purples`, `RdPus`, `Reds`, `YlGn`, `YlGnBu`, `YlOrBr`, `YlOrRd`) or `viridis` package (`viridis`, `inferno`, `magma`, `plasma`). There is a `palette_reverse` argument that makes it possible to reverse the order of the colors in the palette.
+
+```{r}
+ec_tile_map(ec_languages,
+            feature_column = "consonant_inventory_size",
+            title = "Consonant inventory size (Moroz 2021)",
+            annotate_feature = TRUE,
+            tile_colors = "Greens")
+
+ec_tile_map(ec_languages,
+            feature_column = "consonant_inventory_size",
+            title = "Consonant inventory size (Moroz 2021)",
+            annotate_feature = TRUE,
+            tile_colors = "Greens",
+            palette_reverse = TRUE)
+
+ec_tile_map(ec_languages,
+            feature_column = "consonant_inventory_size",
+            title = "Consonant inventory size (Moroz 2021)",
+            annotate_feature = TRUE,
+            tile_colors = "viridis")
+
+ec_tile_map(ec_languages,
+            feature_column = "consonant_inventory_size",
+            title = "Consonant inventory size (Moroz 2021)",
+            annotate_feature = TRUE,
+            tile_colors = "viridis",
+            palette_reverse = TRUE)
+```
+
+To define your own palette for a numeric variable, you can add your own colors.
+
+```{r}
+ec_tile_map(ec_languages,
+            feature_column = "consonant_inventory_size",
+            title = "Consonant inventory size (Moroz 2021)",
+            annotate_feature = TRUE,
+            tile_colors = c("navy", "tomato"))
+```
+
+When the color scheme is clear and the `annotate_feature` argument draws the exact values of the feature, it makes sense to get rid of the legend using the `theme()` function from `ggplot2`:
 
 ```{r}
 library(ggplot2)
-ec_tile_map(ec_languages,
-            feature_column = "consonant_inventory_size",
-            title = "Consonant inventory size (Moroz 2021)",
-            annotate_feature = TRUE) +
-  scale_fill_distiller(palette = "Greens")
 
 ec_tile_map(ec_languages,
             feature_column = "consonant_inventory_size",
             title = "Consonant inventory size (Moroz 2021)",
-            annotate_feature = TRUE) +
-  scale_fill_distiller(palette = "Greens", direction = 1)
-```
-
-To define your own palette for a numeric variable, you can use the `scale_fill_gradient()` function.
-
-```{r}
-ec_tile_map(ec_languages,
-            feature_column = "consonant_inventory_size",
-            title = "Consonant inventory size (Moroz 2021)",
-            annotate_feature = TRUE) +
-  scale_fill_gradient(low = "navy", high = "tomato")
-```
-
-When the color scheme is clear and the `annotate_feature` argument draws the exact values of the feature, it makes sense to get rid of the legend:
-
-```{r}
-ec_tile_map(ec_languages,
-            feature_column = "consonant_inventory_size",
-            title = "Consonant inventory size (Moroz 2021)",
-            annotate_feature = TRUE) +
-  scale_fill_gradient(low = "navy", high = "tomato")+
+            annotate_feature = TRUE,
+            tile_colors = c("navy", "tomato")) +
   theme(legend.position = "none")
 ```
 
-The function `scale_fill_brewer()` will help to change the colors of categorical variables to one of the predefined palettes (`Accent`, `Dark2`, `Paired`, `Pastel1`, `Pastel2`, `Set1`, `Set2`, `Set3`).
+The `tile_colors` argument will help to change the colors of categorical variables to one of the predefined palettes (`Accent`, `Dark2`, `Paired`, `Pastel1`, `Pastel2`, `Set1`, `Set2`, `Set3`).
 
 ```{r}
 ec_tile_map(ec_languages,
             feature_column = "morning_greetings",
-            title = "Morning greetings (Naccarato, Verhees 2021)")+
-  scale_fill_brewer(palette = "Pastel1", na.translate = FALSE)
+            title = "Morning greetings (Naccarato, Verhees 2021)",
+            tile_colors = "Pastel1", 
+            palette_reverse = TRUE)
 ```
 
-To define your own palette for a categorical variable, you can use the `scale_fill_manual()` function.
+To define your own palette for a categorical variable, you can use the `tile_colors` argument. Just keep an eye on prodviding the same amount of colors as you have in the feature variable.
 
 ```{r}
 ec_tile_map(ec_languages,
             feature_column = "morning_greetings",
-            title = "Morning greetings (Naccarato, Verhees 2021)")+
-  scale_fill_manual(values = c("#D81E05", "#0070A1", "#00923F"), na.translate = FALSE)
+            title = "Morning greetings (Naccarato, Verhees 2021)",
+            tile_colors = c("#D81E05", "#0070A1", "#00923F"))
 ```
 
 ## Changing values' order

@@ -13,7 +13,8 @@ ec_tile_map(
   abbreviation = TRUE,
   hide_languages = NULL,
   rename_languages = NULL,
-  tile_colors = NULL
+  tile_colors = NULL,
+  palette_reverse = FALSE
 )
 }
 \arguments{
@@ -31,12 +32,18 @@ ec_tile_map(
 
 \item{hide_languages}{Character variable that specifies, which languages should be removed from the template.}
 
-\item{rename_languages}{This variable maps old language names to their corresponding new names. It can be represented as either:
+\item{rename_languages}{This variable maps old language names to their corresponding new names. It can be represented as:
 \itemize{
-\item{A named vector, where names are the old language names and values are the corresponding new language names.}
-\item{A data frame with two columns: \code{language} (the old language names) and \code{new_language_name} (the corresponding new language names).}}}
+\item{either a named vector, where names are the old language names and values are the corresponding new language names.}
+\item{or a data frame with two columns: \code{language} (the old language names) and \code{new_language_name} (the corresponding new language names).}}}
 
-\item{tile_colors}{Character variable that specifies the color of the tiles according to variable levels. It is also possible to use pallettes from \code{RColorBrewer} and \code{viridis} packages.}
+\item{tile_colors}{Character variable that specifies the tile color based on variable levels. Behavior differs depending on the type of the feature variable.
+\itemize{
+\item{For numeric variables, it can be filled with a vector of 2 or 3 colors defining the lower, upper, and middle segments of the palette.}
+\item{For categorical variables, it can be filled with a vector of colors with the length equal to the number of possible values in the feature variable.}
+\item{The variable can also use palettes from the \code{RColorBrewer} and \code{viridis} packages.}}}
+
+\item{palette_reverse}{Logical variable that specifies, whether the colors in palettes from the \code{RColorBrewer} and \code{viridis} packages should be used in reverse order. Not applicable when there is a categorical variable in the \code{feature} argument.}
 }
 \value{
 a `ggplot2` object
