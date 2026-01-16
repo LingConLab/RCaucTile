@@ -43,7 +43,7 @@ ec_tile_map(
 \item{For categorical variables, it can be filled with a vector of colors with the length equal to the number of possible values in the feature variable.}
 \item{The variable can also use palettes from the \code{RColorBrewer} and \code{viridis} packages.}}}
 
-\item{palette_reverse}{Logical variable that specifies, whether the colors in palettes from the \code{RColorBrewer} and \code{viridis} packages should be used in reverse order. Not applicable when there is a categorical variable in the \code{feature} argument.}
+\item{palette_reverse}{Logical variable that specifies, whether the colors in palettes from the \code{RColorBrewer} and \code{viridis} packages should be used in reverse order.}
 }
 \value{
 a `ggplot2` object

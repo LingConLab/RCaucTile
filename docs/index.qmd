@@ -191,6 +191,11 @@ The `tile_colors` argument will help to change the colors of categorical variabl
 ec_tile_map(ec_languages,
             feature_column = "morning_greetings",
             title = "Morning greetings (Naccarato, Verhees 2021)",
+            tile_colors = "Pastel1")
+
+ec_tile_map(ec_languages,
+            feature_column = "morning_greetings",
+            title = "Morning greetings (Naccarato, Verhees 2021)",
             tile_colors = "Pastel1", 
             palette_reverse = TRUE)
 ```
@@ -201,7 +206,7 @@ To define your own palette for a categorical variable, you can use the `tile_col
 ec_tile_map(ec_languages,
             feature_column = "morning_greetings",
             title = "Morning greetings (Naccarato, Verhees 2021)",
-            tile_colors = c("#D81E05", "#0070A1", "#00923F"))
+            tile_colors = c("pink", "#0070A1", "#00923F"))
 ```
 
 ## Changing values' order

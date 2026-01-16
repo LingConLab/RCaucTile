@@ -16,7 +16,7 @@
 #' \item{For numeric variables, it can be filled with a vector of 2 or 3 colors defining the lower, upper, and middle segments of the palette.}
 #' \item{For categorical variables, it can be filled with a vector of colors with the length equal to the number of possible values in the feature variable.}
 #' \item{The variable can also use palettes from the \code{RColorBrewer} and \code{viridis} packages.}}
-#' @param palette_reverse Logical variable that specifies, whether the colors in palettes from the \code{RColorBrewer} and \code{viridis} packages should be used in reverse order. Not applicable when there is a categorical variable in the \code{feature} argument.
+#' @param palette_reverse Logical variable that specifies, whether the colors in palettes from the \code{RColorBrewer} and \code{viridis} packages should be used in reverse order.
 #'
 #' @returns a `ggplot2` object
 #' @export
@@ -45,17 +45,9 @@
 #' @importFrom ggplot2 element_text
 #' @importFrom ggplot2 guides
 #' @importFrom grDevices col2rgb
-#' @importFrom RColorBrewer brewer.pal.info
-#' @importFrom RColorBrewer brewer.pal
-#' @importFrom viridis viridis
-#' @importFrom viridis cividis
-#' @importFrom viridis inferno
-#' @importFrom viridis magma
-#' @importFrom viridis mako
-#' @importFrom viridis plasma
-#' @importFrom viridis rocket
-#' @importFrom viridis turbo
 #' @importFrom scales hue_pal
+#' @importFrom scales col_factor
+#' @importFrom scales col_numeric
 #' @export
 
 ec_tile_map <- function(data = NULL,
@@ -150,7 +142,6 @@ ec_tile_map <- function(data = NULL,
     # merge EC dataset with data provided by a user ---------------------------
 
     for_plot <- merge(RCaucTile::ec_languages, data, all.x = TRUE)
-
 
     # rename languages --------------------------------------------------------
 
@@ -268,6 +259,7 @@ ec_tile_numeric <- function(data,
                             abbreviation,
                             tile_colors,
                             palette_reverse){
+
   # fake variables for R CMD check to be succeedded -------------------------
 
   x <- NULL
@@ -285,10 +277,26 @@ ec_tile_numeric <- function(data,
 
   transform <- ifelse(palette_reverse, "reverse", "identity")
 
+  possible_palettes <- c("viridis", "inferno", "magma", "plasma", "BrBG",
+                         "PiYG", "PRGn", "PuOr", "RdBu", "RdGy", "RdYlBu",
+                         "RdYlGn", "Spectral", "Accent", "Dark2", "Paired",
+                         "Pastel1", "Pastel2", "Set1", "Set2", "Set3", "Blues",
+                         "BuGn", "BuPu", "GnBu", "Greens", "Greys", "Oranges",
+                         "OrRd", "PuBu", "PuBuGn", "PuRd", "Purples", "RdPu",
+                         "Reds", "YlGn", "YlGnBu", "YlOrBr", "YlOrRd")
+
   if(length(tile_colors) <= 1){
 
     if(is.null(tile_colors)){
-      tile_colors <- "Blues"
+      scales::col_numeric(palette = "Blues",
+                          na.color = "grey95",
+                          reverse = palette_reverse,
+                          domain = c(min(for_plot$feature,
+                                         na.rm = TRUE),
+                                     max(for_plot$feature,
+                                         na.rm = TRUE)))(for_plot$feature) ->
+        for_plot$tile_color
+    } else if(tile_colors %in% possible_palettes){
       scales::col_numeric(palette = tile_colors,
                           na.color = "grey95",
                           reverse = palette_reverse,
@@ -297,19 +305,9 @@ ec_tile_numeric <- function(data,
                                      max(for_plot$feature,
                                          na.rm = TRUE)))(for_plot$feature) ->
         for_plot$tile_color
-      } else if(tile_colors %in% c(rownames(RColorBrewer::brewer.pal.info),
-                                 "viridis", "inferno", "magma", "plasma")){
-        scales::col_numeric(palette = tile_colors,
-                            na.color = "grey95",
-                            reverse = palette_reverse,
-                            domain = c(min(for_plot$feature,
-                                           na.rm = TRUE),
-                                       max(for_plot$feature,
-                                           na.rm = TRUE)))(for_plot$feature) ->
-          for_plot$tile_color
-      } else {
-        stop("We expect that if the variable 'tile_colors' is of length of one it is the name of 'ColorBrewer' or 'viridis' palettes")
-      }
+    } else {
+      stop("We expect that if the variable 'tile_colors' is of length of one it is the name of 'ColorBrewer' or 'viridis' palettes")
+    }
   } else if(length(tile_colors) > 3){
 
     stop("We expect that the variable 'tile_colors' is either  a vector of length of 2 or 3 or the name of 'ColorBrewer' or 'viridis' palettes")
@@ -328,8 +326,8 @@ ec_tile_numeric <- function(data,
     }
 
     suppressWarnings(scales::gradient_n_pal(colours = tile_colors,
-                           values = for_plot$feature)(for_plot$feature) ->
-      for_plot$tile_color)
+                                            values = for_plot$feature)(for_plot$feature) ->
+                       for_plot$tile_color)
 
   }
 
@@ -384,57 +382,60 @@ ec_tile_categorical <- function(data,
   }
 
   # add colors for tiles and text -------------------------------------------
+  transform <- ifelse(palette_reverse, "reverse", "identity")
 
-  if(is.null(tile_colors)){
-    levels(for_plot$feature) |>
-      length() |>
-      scales::hue_pal()(n = _) ->
-      tile_colors
-  } else if (sum(tile_colors %in% rownames(RColorBrewer::brewer.pal.info)) > 0){
-    levels(for_plot$feature) |>
-      length() |>
-      RColorBrewer::brewer.pal(n = _, name = tile_colors) ->
-      tile_colors
-  } else if (sum(tile_colors %in% c("viridis")) > 0){
-    levels(for_plot$feature) |>
-      length() |>
-      viridis::viridis(n = _) ->
-      tile_colors
-  } else if (sum(tile_colors %in% c("inferno")) > 0){
-    levels(for_plot$feature) |>
-      length() |>
-      viridis::inferno(n = _) ->
-      tile_colors
-  } else if (sum(tile_colors %in% c("magma")) > 0){
-    levels(for_plot$feature) |>
-      length() |>
-      viridis::magma(n = _) ->
-      tile_colors
-  } else if (sum(tile_colors %in% c("plasma")) > 0){
-    levels(for_plot$feature) |>
-      length() |>
-      viridis::plasma(n = _) ->
-      tile_colors
+  possible_palettes <- c("viridis", "inferno", "magma", "plasma", "BrBG",
+                         "PiYG", "PRGn", "PuOr", "RdBu", "RdGy", "RdYlBu",
+                         "RdYlGn", "Spectral", "Accent", "Dark2", "Paired",
+                         "Pastel1", "Pastel2", "Set1", "Set2", "Set3", "Blues",
+                         "BuGn", "BuPu", "GnBu", "Greens", "Greys", "Oranges",
+                         "OrRd", "PuBu", "PuBuGn", "PuRd", "Purples", "RdPu",
+                         "Reds", "YlGn", "YlGnBu", "YlOrBr", "YlOrRd")
+
+  if(length(tile_colors) <= 1){
+
+    if(is.null(tile_colors)){
+      scales::col_factor(palette = scales::hue_pal()(length(levels(for_plot$feature))),
+                         na.color = "grey95",
+                         domain = levels(for_plot$feature))(for_plot$feature) ->
+        for_plot$tile_color
+      tile_colors <- scales::hue_pal()(length(levels(for_plot$feature)))
+
+    } else if(tile_colors %in% possible_palettes){
+      scales::col_factor(palette = tile_colors,
+                         na.color = "grey95",
+                         reverse = palette_reverse,
+                         domain = for_plot$feature)(for_plot$feature) ->
+        for_plot$tile_color
+    } else {
+      stop("We expect that if the variable 'tile_colors' is of length of one it is the name of 'ColorBrewer' or 'viridis' palettes")
+    }
+
+    legend_colors <- scales::col_factor(palette = tile_colors,
+                                        na.color = "grey95",
+                                        reverse = palette_reverse,
+                                        domain = for_plot$feature)(levels(for_plot$feature))
+
+  } else if(length(tile_colors) > 1){
+    for_color_check <- check_colors(tile_colors)
+    for_color_check[for_color_check %in% FALSE] |>
+      names() ->
+      wrong_color_names
+
+    if(length(wrong_color_names) > 0){
+      paste("We found some cases with the wrong color names:",
+            paste(wrong_color_names, collapse = ", ")) |>
+        stop()
+    }
+    stopifnot("Argument 'tile_colors' should be either a vector of length equal to the number of levels in the 'feature' column, or a vector with ColorBrewer or viridis palettes" =
+                length(levels(for_plot$feature)) == length(tile_colors))
+
+        for_plot <- merge(for_plot,
+                          data.frame(feature = levels(for_plot$feature),
+                                     tile_color = tile_colors),
+                          all.x = TRUE)
+        legend_colors <- tile_colors
   }
-
-  for_color_check <- check_colors(tile_colors)
-  for_color_check[for_color_check %in% FALSE] |>
-    names() ->
-    wrong_color_names
-
-  if(length(wrong_color_names) > 0){
-    paste("We found some cases with the wrong color names:",
-          paste(wrong_color_names, collapse = ", ")) |>
-      stop()
-  }
-
-  stopifnot("Argument 'tile_colors' should be either a vector of length equal to the number of levels in the 'feature' column, or a vector with ColorBrewer or viridis palettes" =
-              length(levels(for_plot$feature)) == length(tile_colors))
-
-  for_plot <- merge(for_plot,
-                    data.frame(feature = levels(for_plot$feature),
-                               tile_color = tile_colors),
-                    all.x = TRUE)
 
   for_plot$text_color <- ifelse(is.na(for_plot$feature),
                                 "grey80",
@@ -451,7 +452,7 @@ ec_tile_categorical <- function(data,
     ggplot2::labs(fill = NULL, color = NULL, title = title) +
     ggplot2::theme(legend.position = "bottom",
                    plot.title = ggplot2::element_text(hjust = title_position)) +
-    ggplot2::scale_fill_manual(values = tile_colors, na.translate = FALSE)+
+    ggplot2::scale_fill_manual(values = legend_colors, na.translate = FALSE)+
     ggplot2::scale_color_manual(values = for_plot$text_color |> unique() |> sort())+
     ggplot2::guides(alpha="none", color = "none")
 }
