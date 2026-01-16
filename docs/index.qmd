@@ -123,7 +123,7 @@ ec_tile_map(ec_languages,
 
 ## Changing the default colors
 
-It is possible that the default colors provided by `RCaucTile` are not suitable for your plots. The argument `tile_colors()` will help to change the colors of numeric variables to one of the predefined palettes from the `RColorBrewer` package (`Blues`, `BuGn`, `BuPu`, `GnBu`, `Greens`, `Grey`, `Oranges`, `OrRd`, `PuBu`, `PuBuGn`, `PuRd`, `Purples`, `RdPus`, `Reds`, `YlGn`, `YlGnBu`, `YlOrBr`, `YlOrRd`) or `viridis` package (`viridis`, `inferno`, `magma`, `plasma`). There is a `palette_reverse` argument that makes it possible to reverse the order of the colors in the palette.
+It is possible that the default colors provided by `RCaucTile` are not suitable for your plots. The argument `tile_colors` will help to change the colors of numeric variables to one of the predefined palettes from the `RColorBrewer` package (`Blues`, `BuGn`, `BuPu`, `GnBu`, `Greens`, `Grey`, `Oranges`, `OrRd`, `PuBu`, `PuBuGn`, `PuRd`, `Purples`, `RdPus`, `Reds`, `YlGn`, `YlGnBu`, `YlOrBr`, `YlOrRd`) or `viridis` package (`viridis`, `inferno`, `magma`, `plasma`). There is a `palette_reverse` argument that makes it possible to reverse the order of the colors in the palette.
 
 ```{r}
 ec_tile_map(ec_languages,
@@ -153,7 +153,7 @@ ec_tile_map(ec_languages,
             palette_reverse = TRUE)
 ```
 
-To define your own palette for a numeric variable, you can add your own colors.
+To define your own palette for a numeric variable, you can provide 2 or 3 colors defining the lower, upper, and middle segments of the palette.
 
 ```{r}
 ec_tile_map(ec_languages,
@@ -161,6 +161,12 @@ ec_tile_map(ec_languages,
             title = "Consonant inventory size (Moroz 2021)",
             annotate_feature = TRUE,
             tile_colors = c("navy", "tomato"))
+
+ec_tile_map(ec_languages,
+            feature_column = "consonant_inventory_size",
+            title = "Consonant inventory size (Moroz 2021)",
+            annotate_feature = TRUE,
+            tile_colors = c("navy", "tomato", "yellow"))
 ```
 
 When the color scheme is clear and the `annotate_feature` argument draws the exact values of the feature, it makes sense to get rid of the legend using the `theme()` function from `ggplot2`:

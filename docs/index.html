@@ -282,7 +282,7 @@ A BibTeX entry for LaTeX users is
 </section>
 <section id="changing-the-default-colors" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="changing-the-default-colors"><span class="header-section-number">4</span> Changing the default colors</h2>
-<p>It is possible that the default colors provided by <code>RCaucTile</code> are not suitable for your plots. The argument <code>tile_colors()</code> will help to change the colors of numeric variables to one of the predefined palettes from the <code>RColorBrewer</code> package (<code>Blues</code>, <code>BuGn</code>, <code>BuPu</code>, <code>GnBu</code>, <code>Greens</code>, <code>Grey</code>, <code>Oranges</code>, <code>OrRd</code>, <code>PuBu</code>, <code>PuBuGn</code>, <code>PuRd</code>, <code>Purples</code>, <code>RdPus</code>, <code>Reds</code>, <code>YlGn</code>, <code>YlGnBu</code>, <code>YlOrBr</code>, <code>YlOrRd</code>) or <code>viridis</code> package (<code>viridis</code>, <code>inferno</code>, <code>magma</code>, <code>plasma</code>). There is a <code>palette_reverse</code> argument that makes it possible to reverse the order of the colors in the palette.</p>
+<p>It is possible that the default colors provided by <code>RCaucTile</code> are not suitable for your plots. The argument <code>tile_colors</code> will help to change the colors of numeric variables to one of the predefined palettes from the <code>RColorBrewer</code> package (<code>Blues</code>, <code>BuGn</code>, <code>BuPu</code>, <code>GnBu</code>, <code>Greens</code>, <code>Grey</code>, <code>Oranges</code>, <code>OrRd</code>, <code>PuBu</code>, <code>PuBuGn</code>, <code>PuRd</code>, <code>Purples</code>, <code>RdPus</code>, <code>Reds</code>, <code>YlGn</code>, <code>YlGnBu</code>, <code>YlOrBr</code>, <code>YlOrRd</code>) or <code>viridis</code> package (<code>viridis</code>, <code>inferno</code>, <code>magma</code>, <code>plasma</code>). There is a <code>palette_reverse</code> argument that makes it possible to reverse the order of the colors in the palette.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
@@ -335,7 +335,7 @@ A BibTeX entry for LaTeX users is
 </div>
 </div>
 </div>
-<p>To define your own palette for a numeric variable, you can add your own colors.</p>
+<p>To define your own palette for a numeric variable, you can provide 2 or 3 colors defining the lower, upper, and middle segments of the palette.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
@@ -349,17 +349,29 @@ A BibTeX entry for LaTeX users is
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">tile_colors =</span> <span class="fu">c</span>(<span class="st">"navy"</span>, <span class="st">"tomato"</span>, <span class="st">"yellow"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-14-2.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
 </div>
 <p>When the color scheme is clear and the <code>annotate_feature</code> argument draws the exact values of the feature, it makes sense to get rid of the legend using the <code>theme()</code> function from <code>ggplot2</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">tile_colors =</span> <span class="fu">c</span>(<span class="st">"navy"</span>, <span class="st">"tomato"</span>)) <span class="sc">+</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"consonant_inventory_size"</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Consonant inventory size (Moroz 2021)"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">annotate_feature =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">tile_colors =</span> <span class="fu">c</span>(<span class="st">"navy"</span>, <span class="st">"tomato"</span>)) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -370,11 +382,11 @@ A BibTeX entry for LaTeX users is
 </div>
 <p>The <code>tile_colors</code> argument will help to change the colors of categorical variables to one of the predefined palettes (<code>Accent</code>, <code>Dark2</code>, <code>Paired</code>, <code>Pastel1</code>, <code>Pastel2</code>, <code>Set1</code>, <code>Set2</code>, <code>Set3</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">tile_colors =</span> <span class="st">"Pastel1"</span>, </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">palette_reverse =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">tile_colors =</span> <span class="st">"Pastel1"</span>, </span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">palette_reverse =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -385,10 +397,10 @@ A BibTeX entry for LaTeX users is
 </div>
 <p>To define your own palette for a categorical variable, you can use the <code>tile_colors</code> argument. Just keep an eye on prodviding the same amount of colors as you have in the feature variable.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">tile_colors =</span> <span class="fu">c</span>(<span class="st">"#D81E05"</span>, <span class="st">"#0070A1"</span>, <span class="st">"#00923F"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">tile_colors =</span> <span class="fu">c</span>(<span class="st">"#D81E05"</span>, <span class="st">"#0070A1"</span>, <span class="st">"#00923F"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -402,12 +414,12 @@ A BibTeX entry for LaTeX users is
 <h2 data-number="5" class="anchored" data-anchor-id="changing-values-order"><span class="header-section-number">5</span> Changing values’ order</h2>
 <p>The default order of values in R is alphabetical. To impose a different order, you can use the <code>factor()</code> function. This function doesn’t change the values themselves, but it instructs R to treat an input vector as ordered. This can be important for features with a natural order. For example, the following demonstrates how to override the default alphabetical order using <code>factor()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Avar"</span>, <span class="st">"Chechen"</span>, <span class="st">"Mehweb"</span>),</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">feature =</span> <span class="fu">c</span>(<span class="st">"value a"</span>, <span class="st">"value b"</span>, <span class="st">"value b"</span>))</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>feature <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>feature, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"value b"</span>, <span class="st">"value a"</span>))</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Avar"</span>, <span class="st">"Chechen"</span>, <span class="st">"Mehweb"</span>),</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">feature =</span> <span class="fu">c</span>(<span class="st">"value a"</span>, <span class="st">"value b"</span>, <span class="st">"value b"</span>))</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>feature <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>feature, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"value b"</span>, <span class="st">"value a"</span>))</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -422,10 +434,10 @@ A BibTeX entry for LaTeX users is
 <p>The East Caucasian language family exhibits significant dialectal differentiation. A unified genealogical classification of all idioms spoken in Daghestan does not exist. The default language inventory in <code>RCaucTile</code> is based on the genealogical classification from the Typological Atlas of the Languages of Daghestan (see <a href="https://lingconlab.ru/tald/languages.html">the languages page</a>). Therefore, it is highly probable that some researchers may wish to modify the default inventory by removing or altering the names of existing units.</p>
 <p>To remove specific languages from the template, list the desired languages in the <code>hide_languages</code> argument.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Gigatli"</span>, <span class="st">"Shari"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Gigatli"</span>, <span class="st">"Shari"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -439,14 +451,14 @@ A BibTeX entry for LaTeX users is
 <li>A named vector, where the names are the old language names and the values are the corresponding new language names.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span> <span class="ot">=</span> <span class="st">"Andi"</span>,</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Northern Akhvakh"</span> <span class="ot">=</span> <span class="st">"Akhvakh"</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span> <span class="ot">=</span> <span class="st">"Andi"</span>,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Northern Akhvakh"</span> <span class="ot">=</span> <span class="st">"Akhvakh"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -459,14 +471,14 @@ A BibTeX entry for LaTeX users is
 <li>A data frame with two columns: <code>language</code> (the old language names) and <code>new_language_name</code> (the corresponding new language names).</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span>, <span class="st">"Northern Akhvakh"</span>),</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">new_language_name =</span> <span class="fu">c</span>(<span class="st">"Andi"</span>, <span class="st">"Akhvakh"</span>))</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>new_language_names <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Upper Andi"</span>, <span class="st">"Northern Akhvakh"</span>),</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">new_language_name =</span> <span class="fu">c</span>(<span class="st">"Andi"</span>, <span class="st">"Akhvakh"</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ec_tile_map</span>(ec_languages,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">feature_column =</span> <span class="st">"morning_greetings"</span>,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Morning greetings (Naccarato, Verhees 2021)"</span>,</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">hide_languages =</span> <span class="fu">c</span>(<span class="st">"Lower Andi"</span>, <span class="st">"Southern Akhvakh"</span>),</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">rename_languages =</span> new_language_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
