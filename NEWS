@@ -1,5 +1,7 @@
 RCaucTile 1.0.4
 - small fix in `tile_colors`
+- change the boundary about black/white decision
+- update the `ec_languages` dataset with the Southern Akhvakh data on size of the consonant inventory
 
 RCaucTile 1.0.3
 - add `tile_colors` argument

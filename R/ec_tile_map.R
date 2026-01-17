@@ -327,7 +327,7 @@ ec_tile_numeric <- function(data,
     }
 
     suppressWarnings(scales::gradient_n_pal(colours = tile_colors,
-                                            values = for_plot$feature)(for_plot$feature) ->
+                                            values = for_plot$feature |> sort())(for_plot$feature) ->
                        for_plot$tile_color)
 
   }
@@ -406,7 +406,7 @@ ec_tile_categorical <- function(data,
       scales::col_factor(palette = tile_colors,
                          na.color = "grey95",
                          reverse = palette_reverse,
-                         domain = for_plot$feature)(for_plot$feature) ->
+                         domain = for_plot$feature |> sort())(for_plot$feature) ->
         for_plot$tile_color
     } else {
       stop("We expect that if the variable 'tile_colors' is of length of one it is the name of 'RColorBrewer' or 'viridis' palettes")
@@ -415,7 +415,7 @@ ec_tile_categorical <- function(data,
     legend_colors <- scales::col_factor(palette = tile_colors,
                                         na.color = "grey95",
                                         reverse = palette_reverse,
-                                        domain = for_plot$feature)(levels(for_plot$feature))
+                                        domain = for_plot$feature |> sort())(levels(for_plot$feature))
 
   } else if(length(tile_colors) > 1){
     for_color_check <- check_colors(tile_colors)
@@ -467,7 +467,7 @@ define_annotation_color <- function(colors){
 
   ifelse((colors_for_text$red*0.299 +
             colors_for_text$green*0.587 +
-            colors_for_text$blue*0.114) > 160,
+            colors_for_text$blue*0.114) > 128,
          "#000000",
          "white")
 }
