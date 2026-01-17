@@ -1,7 +1,7 @@
 Package: RCaucTile
 Type: Package
 Title: Tile Grid Maps for East Caucasian Languages
-Version: 1.0.2
+Version: 1.0.4
 Authors@R: person("George", "Moroz",
                   role = c("aut", "cre"),
                   email = "agricolamz@gmail.com",

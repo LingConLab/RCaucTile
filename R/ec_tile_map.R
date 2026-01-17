@@ -288,7 +288,8 @@ ec_tile_numeric <- function(data,
   if(length(tile_colors) <= 1){
 
     if(is.null(tile_colors)){
-      scales::col_numeric(palette = "Blues",
+      tile_colors <- "Blues"
+      scales::col_numeric(palette = tile_colors,
                           na.color = "grey95",
                           reverse = palette_reverse,
                           domain = c(min(for_plot$feature,
@@ -306,11 +307,11 @@ ec_tile_numeric <- function(data,
                                          na.rm = TRUE)))(for_plot$feature) ->
         for_plot$tile_color
     } else {
-      stop("We expect that if the variable 'tile_colors' is of length of one it is the name of 'ColorBrewer' or 'viridis' palettes")
+      stop("We expect that if the variable 'tile_colors' is of length of one it is the name of 'RColorBrewer' or 'viridis' palettes")
     }
   } else if(length(tile_colors) > 3){
 
-    stop("We expect that the variable 'tile_colors' is either  a vector of length of 2 or 3 or the name of 'ColorBrewer' or 'viridis' palettes")
+    stop("We expect that the variable 'tile_colors' is either  a vector of length of 2 or 3 or the name of 'RColorBrewer' or 'viridis' palettes")
 
   } else if(length(tile_colors) %in% c(2, 3)){
 
@@ -408,7 +409,7 @@ ec_tile_categorical <- function(data,
                          domain = for_plot$feature)(for_plot$feature) ->
         for_plot$tile_color
     } else {
-      stop("We expect that if the variable 'tile_colors' is of length of one it is the name of 'ColorBrewer' or 'viridis' palettes")
+      stop("We expect that if the variable 'tile_colors' is of length of one it is the name of 'RColorBrewer' or 'viridis' palettes")
     }
 
     legend_colors <- scales::col_factor(palette = tile_colors,
@@ -427,7 +428,7 @@ ec_tile_categorical <- function(data,
             paste(wrong_color_names, collapse = ", ")) |>
         stop()
     }
-    stopifnot("Argument 'tile_colors' should be either a vector of length equal to the number of levels in the 'feature' column, or a vector with ColorBrewer or viridis palettes" =
+    stopifnot("Argument 'tile_colors' should be either a vector of length equal to the number of levels in the 'feature' column, or a vector with 'RColorBrewer' or 'viridis' palettes" =
                 length(levels(for_plot$feature)) == length(tile_colors))
 
         for_plot <- merge(for_plot,

@@ -1,4 +1,7 @@
-RCaucTile 1.0.2
+RCaucTile 1.0.4
+- small fix in `tile_colors`
+
+RCaucTile 1.0.3
 - add `tile_colors` argument
 
 RCaucTile 1.0.1
