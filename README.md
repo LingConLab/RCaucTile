@@ -15,13 +15,15 @@ Here are several examples of the result tile maps.
 
 I would like to thank Yura Koryakov, Kostya Filatov, Ira Politova and Vlada Termus for the help with preparing language template.
 
-To cite RCaucTile in publications, please use
+To cite `RCaucTile` in publications, please use
 
 ```
 Moroz, George (2025). RCaucTile: Tile Grid Maps for East Caucasian Languages. R package. doi:10.32614/CRAN.package.RCaucTile
+```
 
 A BibTeX entry for LaTeX users is
 
+```
 @Manual{moroz2025RCaucTile,
   title = {{RCaucTile}: {T}ile {G}rid {M}aps for {E}ast {C}aucasian {L}anguages},
   author = {George Moroz},
