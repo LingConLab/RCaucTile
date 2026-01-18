@@ -14,3 +14,19 @@ Here are several examples of the result tile maps.
 ![](docs/index_files/figure-html/unnamed-chunk-13-3.png)
 
 I would like to thank Yura Koryakov, Kostya Filatov, Ira Politova and Vlada Termus for the help with preparing language template.
+
+To cite RCaucTile in publications, please use
+
+```
+Moroz, George (2025). RCaucTile: Tile Grid Maps for East Caucasian Languages. R package. doi:10.32614/CRAN.package.RCaucTile
+
+A BibTeX entry for LaTeX users is
+
+@Manual{moroz2025RCaucTile,
+  title = {{RCaucTile}: {T}ile {G}rid {M}aps for {E}ast {C}aucasian {L}anguages},
+  author = {George Moroz},
+  doi = {10.32614/CRAN.package.RCaucTile},
+  url = {https://CRAN.R-project.org/package=RCaucTile},
+  year = {2025}
+}
+```

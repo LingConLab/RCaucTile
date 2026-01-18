@@ -1,7 +1,8 @@
 bibentry(bibtype = "Manual",
-         textVersion = "Moroz, George (2025). RCaucTile: Tile Grid Maps for East Caucasian Languages. R package.",
+         textVersion = "Moroz, George (2025). RCaucTile: Tile Grid Maps for East Caucasian Languages. R package. doi:10.32614/CRAN.package.RCaucTile",
          header = "To cite RCaucTile in publications, please use",
          title = "{RCaucTile}: {T}ile {G}rid {M}aps for {E}ast {C}aucasian {L}anguages",
          author = "George Moroz",
+         doi = "10.32614/CRAN.package.RCaucTile",
          url = "https://CRAN.R-project.org/package=RCaucTile",
          year = "2025")
