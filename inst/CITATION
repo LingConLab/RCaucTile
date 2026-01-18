@@ -3,4 +3,5 @@ bibentry(bibtype = "Manual",
          header = "To cite RCaucTile in publications, please use",
          title = "{RCaucTile}: {T}ile {G}rid {M}aps for {E}ast {C}aucasian {L}anguages",
          author = "George Moroz",
+         url = "https://CRAN.R-project.org/package=RCaucTile",
          year = "2025")
